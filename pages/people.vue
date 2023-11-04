@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-let Thumbnails = ref([
+const Thumbnails = ref([
   {
     id: 0,
     isActived: false,
