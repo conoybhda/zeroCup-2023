@@ -128,6 +128,11 @@ const onLeave = (el, done) => {
       height: auto;
       cursor: pointer;
       margin-top: 20%;
+      transition: opacity 0.8s;
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
 
     .box {
