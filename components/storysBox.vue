@@ -27,9 +27,6 @@ const props = defineProps({
   align-items: center;
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
-  overflow-y: hidden;
-  scroll-behavior: smooth;
 
   .storyBox {
     flex-shrink: 0;
@@ -38,11 +35,6 @@ const props = defineProps({
     margin: 1%;
     overflow: hidden;
     transition: all 0.5s;
-
-    &:hover {
-      cursor: pointer;
-      width: 40%;
-    }
   }
 }
 </style>

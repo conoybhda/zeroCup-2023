@@ -4,6 +4,11 @@
   </div>
 </template>
 <script setup>
+definePageMeta({
+  title: "Story",
+  description: "Story",
+  keepalive: true,
+});
 import StorysBox from "~/components/storysBox.vue";
 
 const storys = ref([
@@ -14,16 +19,14 @@ const storys = ref([
   },
   { id: 1, islocked: true, imgSrc: "/img/a.jpg" },
   { id: 2, islocked: true, imgSrc: "/img/a.jpg" },
-  { id: 3, islocked: true, imgSrc: "/img/a.jpg" },
-  { id: 4, islocked: true, imgSrc: "/img/a.jpg" },
-  { id: 5, islocked: true, imgSrc: "/img/a.jpg" },
 ]);
 </script>
 <style scoped>
 .storysBox {
   position: relative;
   width: 70vw;
-  height: 50vh;
-  margin: 0 auto;
+  height: 70vh;
+  margin-top: 20vh;
+  margin-left: 5vw;
 }
 </style>
