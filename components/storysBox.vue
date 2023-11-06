@@ -1,23 +1,13 @@
 <template>
-  <div class="storysBox">
-    <img src="/icon/left.svg" class="icon" @click="changePage(-1)" />
+  <div>
     <div class="box">
-      <storyBox
+      <StoryBox
         class="storyBox"
-        :style="`z-index:${
-          storys.length -
-          (nowStory > story.id ? nowStory - story.id : story.id - nowStory)
-        };transform: translateX(${15 * (story.id - nowStory)}%);`"
-        v-for="story in storys"
+        v-for="(story, index) in storys"
         :islocked="story.islocked"
         :src="story.imgSrc"
-        :clip="`inset(0px ${story.id < nowStory ? 85 : 0}% 0px ${
-          story.id > nowStory ? 85 : 0
-        }%)`"
-        :isActived="story.id === nowStory"
-      ></storyBox>
+      ></StoryBox>
     </div>
-    <img src="/icon/right.svg" class="icon" @click="changePage(1)" />
   </div>
 </template>
 <script setup>
@@ -27,86 +17,31 @@ const props = defineProps({
     required: true,
   },
 });
-const nowStory = ref(0);
-const changePage = (num) => {
-  if (nowStory.value + num < 0) nowStory.value = props.storys.length;
-  nowStory.value = (nowStory.value + num) % props.storys.length;
-};
 </script>
 <style scoped>
-.storysBox {
+.box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
   width: 100%;
   height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
 
-  .icon {
-    width: auto;
-    max-width: 10%;
-    height: auto;
-    cursor: pointer;
-    margin-top: 10%;
-    transition: opacity 0.8s;
+  .storyBox {
+    flex-shrink: 0;
+    width: 20%;
+    height: 100%;
+    margin: 1%;
+    overflow: hidden;
+    transition: all 0.5s;
 
     &:hover {
-      opacity: 0.5;
-    }
-  }
-  .box {
-    position: relative;
-    width: 80%;
-    height: 100%;
-    overflow: hidden;
-    -webkit-mask: linear-gradient(
-      90deg,
-      transparent,
-      #000 5%,
-      #000 95%,
-      transparent
-    );
-    mask: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
-    .storyBox {
-      position: absolute;
-      width: 70%;
-      height: 100%;
-      left: 20%;
-      transition: transform 0.5s, opacity 0.5s;
-      font-size: 0;
-
-      &::before {
-        background-image: linear-gradient(
-          -90deg,
-          rgba(0, 0, 0, 0.2),
-          rgba(0, 0, 0, 0.1) 20%,
-          rgba(0, 0, 0, 0.05) 40%,
-          transparent 80%
-        );
-        right: 100%;
-      }
-      &::after {
-        background-image: linear-gradient(
-          90deg,
-          rgba(0, 0, 0, 0.2),
-          rgba(0, 0, 0, 0.1) 20%,
-          rgba(0, 0, 0, 0.05) 40%,
-          transparent 80%
-        );
-        left: 100%;
-      }
-
-      &::before,
-      &::after {
-        content: "";
-        display: block;
-        height: 100%;
-        opacity: 0;
-        pointer-events: none;
-        position: absolute;
-        top: 0;
-        transition: opacity 0.3s;
-        width: 4rem;
-      }
+      cursor: pointer;
+      width: 40%;
     }
   }
 }

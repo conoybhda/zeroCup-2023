@@ -1,11 +1,9 @@
 <template>
   <div>
-    <StorysBox class="storysBox" :storys="storys"></StorysBox>
+    <photosBox class="storysBox" :storys="storys"></photosBox>
   </div>
 </template>
 <script setup>
-import StorysBox from "~/components/storysBox.vue";
-
 const storys = ref([
   {
     id: 0,
@@ -15,8 +13,6 @@ const storys = ref([
   { id: 1, islocked: true, imgSrc: "/img/a.jpg" },
   { id: 2, islocked: true, imgSrc: "/img/a.jpg" },
   { id: 3, islocked: true, imgSrc: "/img/a.jpg" },
-  { id: 4, islocked: true, imgSrc: "/img/a.jpg" },
-  { id: 5, islocked: true, imgSrc: "/img/a.jpg" },
 ]);
 </script>
 <style scoped>
