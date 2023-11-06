@@ -77,6 +77,7 @@ const props = defineProps({
     justify-content: center;
     align-items: center;
     color: white;
+    cursor: pointer;
 
     &:hover {
       opacity: 0.2;

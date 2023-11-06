@@ -1,6 +1,12 @@
 <template>
   <div class="storysBox">
-    <img src="/icon/left.svg" class="icon" @click="changePage(-1)" />
+    <img
+      src="/icon/left.svg"
+      class="icon"
+      @click="
+        $emit('update:nowStory', (nowStory + storys.length - 1) % storys.length)
+      "
+    />
     <div class="box">
       <photoBox
         class="storyBox"
@@ -15,9 +21,14 @@
           story.id > nowStory ? 85 : 0
         }%)`"
         :isActived="story.id === nowStory"
+        @click="$emit('update:nowStory', story.id)"
       ></photoBox>
     </div>
-    <img src="/icon/right.svg" class="icon" @click="changePage(1)" />
+    <img
+      src="/icon/right.svg"
+      class="icon"
+      @click="$emit('update:nowStory', (nowStory + 1) % storys.length)"
+    />
   </div>
 </template>
 <script setup>
@@ -26,12 +37,12 @@ const props = defineProps({
     type: Array,
     required: true,
   },
+  nowStory: {
+    type: Number,
+    required: true,
+  },
 });
-const nowStory = ref(0);
-const changePage = (num) => {
-  if (nowStory.value + num < 0) nowStory.value = props.storys.length;
-  nowStory.value = (nowStory.value + num) % props.storys.length;
-};
+const emits = defineEmits(["update:nowStory"]);
 </script>
 <style scoped>
 .storysBox {
@@ -70,7 +81,7 @@ const changePage = (num) => {
       position: absolute;
       width: 70%;
       height: 100%;
-      left: 20%;
+      left: 15%;
       transition: transform 0.5s, opacity 0.5s;
       font-size: 0;
 
