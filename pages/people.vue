@@ -1,10 +1,11 @@
 <template>
   <div>
-    <ThumbnailBox
+    <PeopleBox
       class="thumb"
       :Thumbnails="Thumbnails"
+      v-model:page="page"
       @clickThum="onClickThum"
-    ></ThumbnailBox>
+    ></PeopleBox>
   </div>
 </template>
 
@@ -23,6 +24,8 @@ const Thumbnails = ref([
   { id: 6, isActived: false, imgSrc: "/img/a.jpg" },
   { id: 7, isActived: false, imgSrc: "/img/a.jpg" },
 ]);
+
+const page = ref(0);
 
 const onClickThum = (id) => {
   console.log(id);

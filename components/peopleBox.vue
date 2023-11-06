@@ -16,7 +16,7 @@
       <img src="/icon/left.svg" class="icon" @click="changePage(-1)" />
       <div class="box" ref="box">
         <transition-group :appear="true" @enter="onEnter" @leave="onLeave">
-          <Thumbnail
+          <People
             v-for="(thumb, index) in NowThumbnails"
             :key="thumb.id"
             class="thumb"
@@ -24,7 +24,7 @@
             :data-index="index"
             :isActived="thumb.isActived"
             @click="emits('clickThum', thumb.id)"
-          ></Thumbnail>
+          ></People>
         </transition-group>
       </div>
       <img src="/icon/right.svg" class="icon" @click="changePage(1)" />
@@ -32,23 +32,24 @@
   </div>
 </template>
 <script setup>
-const props = defineProps(["Thumbnails"]);
-const emits = defineEmits(["clickThum"]);
+const props = defineProps(["Thumbnails", "page"]);
+const emits = defineEmits(["clickThum", "update:page"]);
 const { Thumbnails } = toRefs(props);
 const MaxNum = 3;
-let page = ref(0);
 const ischange = ref(true);
 const box = ref(null);
 const NowThumbnails = computed(() => {
-  return Thumbnails.value.slice(page.value * MaxNum, (page.value + 1) * MaxNum);
+  return Thumbnails.value.slice(props.page * MaxNum, (props.page + 1) * MaxNum);
 });
 
 const changePage = (e) => {
-  if (page.value + e < 0) {
-    page.value = Math.ceil(Thumbnails.value.length / MaxNum) - 1;
+  let t = props.page;
+  if (t + e < 0) {
+    t = Math.ceil(Thumbnails.value.length / MaxNum) - 1;
   } else {
-    page.value = (page.value + e) % Math.ceil(Thumbnails.value.length / MaxNum);
+    t = (t + e) % Math.ceil(Thumbnails.value.length / MaxNum);
   }
+  emits("update:page", t);
   ischange.value = !ischange.value;
   setTimeout(() => {
     ischange.value = !ischange.value;
