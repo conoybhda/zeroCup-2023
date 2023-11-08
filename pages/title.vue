@@ -7,7 +7,7 @@
 <script setup></script>
 
 <style scoped>
-.index{
+.index {
   width: 100vw;
   height: 100vh;
   overflow: hidden;

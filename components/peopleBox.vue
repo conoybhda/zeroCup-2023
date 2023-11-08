@@ -22,7 +22,7 @@
             class="thumb"
             :img-src="thumb.imgSrc"
             :data-index="index"
-            :isActived="thumb.isActived"
+            :isActived="thumb.id == active"
             @click="emits('clickThum', thumb.id)"
           ></People>
         </transition-group>
@@ -32,7 +32,7 @@
   </div>
 </template>
 <script setup>
-const props = defineProps(["Thumbnails", "page"]);
+const props = defineProps(["Thumbnails", "page", "active"]);
 const emits = defineEmits(["clickThum", "update:page"]);
 const { Thumbnails } = toRefs(props);
 const MaxNum = 3;

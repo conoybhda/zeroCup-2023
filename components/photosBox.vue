@@ -1,12 +1,5 @@
 <template>
   <div class="storysBox">
-    <img
-      src="/icon/left.svg"
-      class="icon"
-      @click="
-        $emit('update:nowStory', (nowStory + storys.length - 1) % storys.length)
-      "
-    />
     <div class="box">
       <photoBox
         class="storyBox"
@@ -15,7 +8,6 @@
           (nowStory > story.id ? nowStory - story.id : story.id - nowStory)
         };transform: translateX(${15 * (story.id - nowStory)}%);`"
         v-for="story in storys"
-        :islocked="story.islocked"
         :src="story.imgSrc"
         :clip="`inset(0px ${story.id < nowStory ? 85 : 0}% 0px ${
           story.id > nowStory ? 85 : 0
@@ -24,11 +16,6 @@
         @click="$emit('update:nowStory', story.id)"
       ></photoBox>
     </div>
-    <img
-      src="/icon/right.svg"
-      class="icon"
-      @click="$emit('update:nowStory', (nowStory + 1) % storys.length)"
-    />
   </div>
 </template>
 <script setup>
@@ -49,7 +36,7 @@ const emits = defineEmits(["update:nowStory"]);
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
 
   .icon {

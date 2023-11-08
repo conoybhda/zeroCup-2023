@@ -1,9 +1,12 @@
 <template>
   <div>
     <NuxtLoadingIndicator></NuxtLoadingIndicator>
-    <NuxtPage></NuxtPage>
+    <NuxtLayout>
+      <NuxtPage :keepalive="true"></NuxtPage>
+    </NuxtLayout>
   </div>
 </template>
+<script setup></script>
 <style>
 * {
   margin: 0;
