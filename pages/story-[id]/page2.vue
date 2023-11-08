@@ -11,10 +11,22 @@
       src="/source/Chapter1/Decoration.png"
     />
     <div class="body">
-      <img :src="data.people[nowActive].imgSrc" class="bodyImg" />
+      <Transition :appear="true" @enter="onEnter" @leave="onLeave">
+        <img
+          v-if="aniControl"
+          :src="data.people[nowActive].imgSrc"
+          class="bodyImg"
+        />
+      </Transition>
+
       <div class="leftBox">
-        <p>{{ data.people[nowActive].name }}</p>
-        <p>{{ data.people[nowActive].description }}</p>
+        <Transition :appear="true" @enter="onEnterL" @leave="onLeaveL">
+          <div v-if="aniControl">
+            <p class="name">{{ data.people[nowActive].name }}</p>
+            <p class="description">{{ data.people[nowActive].description }}</p>
+          </div>
+        </Transition>
+
         <PeopleBox
           class="thumb"
           :-thumbnails="data.people"
@@ -25,6 +37,7 @@
         </PeopleBox>
       </div>
     </div>
+    <img class="nextPage" src="/source/Chapter1/ToNextPage.png" />
   </div>
 </template>
 <script setup>
@@ -36,12 +49,16 @@ definePageMeta({
 });
 const nowPage = ref(0);
 const nowActive = ref(0);
-
+const aniControl = ref(true);
 const route = useRoute();
 const data = getData(route.params.id);
 
 const onClickThum = (id) => {
   nowActive.value = id;
+  aniControl.value = false;
+  setTimeout(() => {
+    aniControl.value = true;
+  }, 250);
 };
 
 let ischange = false;
@@ -66,6 +83,96 @@ onActivated(() => {
 onDeactivated(() => {
   window.removeEventListener("wheel", changeRoute);
 });
+
+const onEnter = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 0,
+        transform: "translateX(-4%)",
+      },
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+    ],
+    {
+      duration: 800,
+      easing: "ease-in-out",
+      delay: 300,
+      fill: "both",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
+
+const onLeave = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+      {
+        opacity: 0,
+        transform: "translateX(2%)",
+      },
+    ],
+    {
+      duration: 300,
+      easing: "ease-in-out",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
+const onEnterL = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 0,
+        transform: "translateX(2%)",
+      },
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+    ],
+    {
+      duration: 800,
+      easing: "ease-in-out",
+      delay: 300,
+      fill: "both",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
+const onLeaveL = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+      {
+        opacity: 0,
+        transform: "translateX(-1%)",
+      },
+    ],
+    {
+      duration: 300,
+      easing: "ease-in-out",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
 </script>
 <style scoped>
 .page2 {
@@ -102,11 +209,38 @@ onDeactivated(() => {
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
+      font-family: "XiaoDouDao";
+      .name {
+        font-size: 8vh;
+        height: 10vh;
+      }
+      .description {
+        font-size: 3vh;
+        height: 25vh;
+      }
       .thumb {
         width: 50vw;
         height: auto;
       }
     }
+  }
+  .nextPage {
+    height: 6%;
+    width: auto;
+    position: absolute;
+    bottom: 1%;
+    left: 8%;
+    z-index: 99;
+    animation: shan 3s infinite both alternate ease-in-out;
+  }
+}
+
+@keyframes shan {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
   }
 }
 .fade-enter-active,

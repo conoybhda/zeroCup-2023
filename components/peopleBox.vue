@@ -13,7 +13,12 @@
     </Transition>
 
     <div class="ThumbnailBox">
-      <img src="/icon/left.svg" class="icon" @click="changePage(-1)" />
+      <img
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        class="icon"
+        style="transform: rotate(90deg)"
+        @click="changePage(-1)"
+      />
       <div class="box" ref="box">
         <transition-group :appear="true" @enter="onEnter" @leave="onLeave">
           <People
@@ -27,7 +32,12 @@
           ></People>
         </transition-group>
       </div>
-      <img src="/icon/right.svg" class="icon" @click="changePage(1)" />
+      <img
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        class="icon"
+        style="transform: rotate(-90deg)"
+        @click="changePage(1)"
+      />
     </div>
   </div>
 </template>

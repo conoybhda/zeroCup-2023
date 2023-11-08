@@ -7,4 +7,5 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
   },
+  css: ["~/assets/css/font.css"],
 });

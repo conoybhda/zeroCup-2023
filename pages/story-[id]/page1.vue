@@ -18,6 +18,12 @@
         @click="changePage(1)"
       />
     </div>
+    <div class="description">
+      <Transition :appear="true" @enter="onEnter" @leave="onLeave">
+        <div v-if="aniControl">{{ data.photos[nowStory].description }}</div>
+      </Transition>
+    </div>
+
     <img class="nextPage" src="/source/Chapter1/ToNextPage.png" />
   </div>
 </template>
@@ -32,12 +38,20 @@ definePageMeta({
 const route = useRoute();
 const data = getData(route.params.id);
 const nowStory = ref(0);
+const aniControl = ref(true);
 const changePage = (num) => {
   if (nowStory.value + num < 0) {
     nowStory.value = data.photos.length;
   }
   nowStory.value = (nowStory.value + num) % data.photos.length;
 };
+
+watch(nowStory, (val) => {
+  aniControl.value = false;
+  setTimeout(() => {
+    aniControl.value = true;
+  }, 300);
+});
 
 let ischange = false;
 const changeRoute = async (e) => {
@@ -65,6 +79,52 @@ onActivated(() => {
 onDeactivated(() => {
   window.removeEventListener("wheel", changeRoute);
 });
+
+const onEnter = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 0,
+        transform: "translateX(5%)",
+      },
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+    ],
+    {
+      duration: 400,
+      easing: "ease-in-out",
+      delay: 300,
+      fill: "both",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
+
+const onLeave = (el, done) => {
+  let a = el.animate(
+    [
+      {
+        opacity: 1,
+        transform: "translateX(0%)",
+      },
+      {
+        opacity: 0,
+        transform: "translateX(-2%)",
+      },
+    ],
+    {
+      duration: 300,
+      easing: "ease-in-out",
+    }
+  );
+  a.onfinish = () => {
+    done();
+  };
+};
 </script>
 <style scoped>
 .page1 {
@@ -85,13 +145,15 @@ onDeactivated(() => {
     z-index: -99;
   }
   .nextPage {
-    height: 10%;
+    height: 8%;
     width: auto;
     position: absolute;
     bottom: 0%;
     left: 5%;
     z-index: 99;
+    animation: shan 3s infinite both alternate ease-in-out;
   }
+
   .box {
     width: 85%;
     height: 55%;
@@ -117,8 +179,22 @@ onDeactivated(() => {
       transform: rotate(-90deg);
     }
   }
+  .description {
+    width: 85%;
+    height: 12%;
+    font-family: "XiaoDouDao";
+    margin-top: 5vh;
+    font-size: 2vw;
+  }
 }
-
+@keyframes shan {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;

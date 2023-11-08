@@ -2,10 +2,10 @@
   <div>
     <img :src="data['title-picture']" class="title" />
     <div class="box">
-      <img :src="data.chap" class="chap" />
-      <img :src="data.title" class="titleText" />
+      <span class="chap">{{ data.chap }}</span>
+      <span class="titleText">{{ data.title }}</span>
     </div>
-    <img class="nextPage" src="/source/PageIndex/ClickToStart.png" />
+    <span class="nextPage">滚动以前往下一页</span>
   </div>
 </template>
 <script setup>
@@ -61,14 +61,14 @@ onDeactivated(() => {
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  opacity: 0.5;
+  opacity: 0.4;
   z-index: -1;
   overflow: hidden;
 }
 .nextPage {
-  height: 5%;
-  width: auto;
+  font-family: "XiaoDouDao";
   position: absolute;
+  font-size: 1.5vw;
   bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
@@ -90,13 +90,13 @@ onDeactivated(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-family: "XiaoDouDao";
   .chap {
-    width: auto;
-    height: 20%;
+    font-size: 5vw;
   }
   .titleText {
-    width: auto;
-    height: 20%;
+    margin-top: 2vh;
+    font-size: 7vw;
   }
 }
 

@@ -1,14 +1,15 @@
 const storyData = [
   {
     "title-picture": "/source/Chapter1/Warship.png",
-    chap: "/source/PageTImeline/Chap1.png",
-    title: "/source/PageTImeline/Ziqiang.png",
+    chap: "第一幕",
+    title: "自强学堂",
     border: "/source/Chapter1/Border.jpg",
     photos: [
       {
         id: 0,
         imgSrc: "/source/Chapter1/ZongLiYaMen.jpg",
-        description: "random image",
+        description:
+          "1893年11月29日 ，张之洞向光绪帝上奏《设立自强学堂片》。 他认为“盖闻经国以自强为本”、“自强之道，以教育人才为先”，故取“自强”二字。",
       },
       {
         id: 1,
