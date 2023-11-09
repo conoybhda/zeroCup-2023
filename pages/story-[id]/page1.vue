@@ -2,21 +2,9 @@
   <div class="page1">
     <img :src="data.border" class="border" />
     <div class="box">
-      <img
-        class="left"
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        @click="changePage(-1)"
-      />
-      <PhotosBox
-        class="photobox"
-        :storys="data.photos"
-        v-model:nowStory="nowStory"
-      ></PhotosBox>
-      <img
-        class="right"
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        @click="changePage(1)"
-      />
+      <img class="left" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(-1)" />
+      <PhotosBox class="photobox" :storys="data.photos" v-model:nowStory="nowStory"></PhotosBox>
+      <img class="right" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(1)" />
     </div>
     <div class="description">
       <Transition :appear="true" @enter="onEnter" @leave="onLeave">
@@ -53,18 +41,18 @@ watch(nowStory, (val) => {
   }, 300);
 });
 
-let ischange = false;
+let isChange = false;
 let startTime = 0;
 const changeRoute = async (e) => {
   if (Date.now().valueOf() - startTime < 800) return;
-  if (ischange) return;
+  if (isChange) return;
   if (e.deltaY > 0) {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/story-${route.params.id}/page2`,
     });
   } else {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/story-${route.params.id}/title`,
     });
@@ -73,7 +61,7 @@ const changeRoute = async (e) => {
 
 onActivated(() => {
   startTime = Date.now().valueOf();
-  ischange = false;
+  isChange = false;
   window.addEventListener("wheel", changeRoute);
 });
 
@@ -136,6 +124,7 @@ const onLeave = (el, done) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
   .border {
     width: 100vw;
     height: 100vh;
@@ -145,6 +134,7 @@ const onLeave = (el, done) => {
     opacity: 0.5;
     z-index: -99;
   }
+
   .nextPage {
     height: 8%;
     width: auto;
@@ -162,17 +152,20 @@ const onLeave = (el, done) => {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     .photobox {
       width: 100%;
       height: 100%;
       margin: 0;
     }
+
     .left {
       width: 8%;
       height: auto;
       margin-right: -8%;
       transform: rotate(90deg);
     }
+
     .right {
       width: 8%;
       height: auto;
@@ -180,6 +173,7 @@ const onLeave = (el, done) => {
       transform: rotate(-90deg);
     }
   }
+
   .description {
     width: 85%;
     height: 12%;
@@ -188,23 +182,28 @@ const onLeave = (el, done) => {
     font-size: 2vw;
   }
 }
+
 @keyframes shan {
   0% {
     opacity: 0.2;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   filter: blur(10px);
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;

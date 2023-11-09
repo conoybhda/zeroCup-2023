@@ -1,22 +1,10 @@
 <template>
   <div class="page2">
-    <img
-      class="bgImg"
-      style="left: 0; top: 0; transform: rotate(180deg)"
-      src="/source/Chapter1/Decoration.png"
-    />
-    <img
-      class="bgImg"
-      style="right: 0; bottom: 0"
-      src="/source/Chapter1/Decoration.png"
-    />
+    <img class="bgImg" style="left: 0; top: 0; transform: rotate(180deg)" src="/source/Chapter1/Decoration.png" />
+    <img class="bgImg" style="right: 0; bottom: 0" src="/source/Chapter1/Decoration.png" />
     <div class="body">
       <Transition :appear="true" @enter="onEnter" @leave="onLeave">
-        <img
-          v-if="aniControl"
-          :src="data.people[nowActive].imgSrc"
-          class="bodyImg"
-        />
+        <img v-if="aniControl" :src="data.people[nowActive].imgSrc" class="bodyImg" />
       </Transition>
 
       <div class="leftBox">
@@ -27,13 +15,8 @@
           </div>
         </Transition>
 
-        <PeopleBox
-          class="thumb"
-          :-thumbnails="data.people"
-          :active="nowActive"
-          v-model:page="nowPage"
-          @clickThum="onClickThum"
-        >
+        <PeopleBox class="thumb" :-thumbnails="data.people" :active="nowActive" v-model:page="nowPage"
+          @clickThum="onClickThum">
         </PeopleBox>
       </div>
     </div>
@@ -61,12 +44,12 @@ const onClickThum = (id) => {
   }, 250);
 };
 
-let ischange = false;
+let isChange = false;
 
 let startTime = 0;
-const changeRoute = async (e) => {
+const isChangeute = async (e) => {
   if (Date.now().valueOf() - startTime < 800) return;
-  if (ischange) return;
+  ifisChangege) return;
   if (e.deltaY < 0) {
     ischange = true;
     await navigateTo({
@@ -74,7 +57,7 @@ const changeRoute = async (e) => {
     });
   }
 };
-
+isChange
 onActivated(() => {
   startTime = Date.now().valueOf();
   ischange = false;
@@ -183,12 +166,14 @@ const onLeaveL = (el, done) => {
   display: flex;
   justify-content: center;
   align-items: center;
+
   .bgImg {
     position: absolute;
     width: auto;
     height: 30%;
     z-index: -1;
   }
+
   .body {
     width: 90%;
     height: 85%;
@@ -197,11 +182,13 @@ const onLeaveL = (el, done) => {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+
     .bodyImg {
       height: 100%;
       width: 35%;
       overflow: hidden;
     }
+
     .leftBox {
       width: 70%;
       height: 100%;
@@ -211,20 +198,24 @@ const onLeaveL = (el, done) => {
       justify-content: space-between;
       align-items: flex-start;
       font-family: "XiaoDouDao";
+
       .name {
         font-size: 8vh;
         height: 10vh;
       }
+
       .description {
         font-size: 3vh;
         height: 25vh;
       }
+
       .thumb {
         width: 50vw;
         height: auto;
       }
     }
   }
+
   .nextPage {
     height: 6%;
     width: auto;
@@ -240,19 +231,23 @@ const onLeaveL = (el, done) => {
   0% {
     opacity: 0.2;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   filter: blur(10px);
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;

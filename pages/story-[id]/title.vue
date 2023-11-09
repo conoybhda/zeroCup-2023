@@ -26,33 +26,33 @@ const changePage = (num) => {
   nowStory.value = (nowStory.value + num) % data.photos.length;
 };
 
-let ischange = false;
+let isChange = false;
 let startTime = 0;
-const changeRoute = async (e) => {
+const isChangeute = async (e) => {
   if (Date.now().valueOf() - startTime < 800) return;
-  if (ischange) return;
+  ifisChangege) return;
   if (e.deltaY > 0) {
     ischange = true;
     await navigateTo({
       path: `/story-${route.params.id}/page1`,
-    });
-  } else {
-    ischange = true;
-    await navigateTo({
-      path: `/storys`,
-    });
-  }
+      isChange
+    } else {
+      ischange = true;
+      await navigateTo({
+        path: `/storys`,
+      });
+    }
 };
+  isChange
+  onActivated(() => {
+    startTime = Date.now().valueOf();
+    ischange = false;
+    window.addEventListener("wheel", changeRoute);
+  });
 
-onActivated(() => {
-  startTime = Date.now().valueOf();
-  ischange = false;
-  window.addEventListener("wheel", changeRoute);
-});
-
-onDeactivated(() => {
-  window.removeEventListener("wheel", changeRoute);
-});
+  onDeactivated(() => {
+    window.removeEventListener("wheel", changeRoute);
+  });
 </script>
 <style scoped>
 .title {
@@ -66,6 +66,7 @@ onDeactivated(() => {
   z-index: -1;
   overflow: hidden;
 }
+
 .nextPage {
   font-family: "XiaoDouDao";
   position: absolute;
@@ -76,14 +77,17 @@ onDeactivated(() => {
   z-index: 99;
   animation: shan 1s infinite both alternate ease-in-out;
 }
+
 @keyframes shan {
   0% {
     opacity: 0.2;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .box {
   width: 100vw;
   height: 100vh;
@@ -92,9 +96,11 @@ onDeactivated(() => {
   justify-content: center;
   align-items: center;
   font-family: "XiaoDouDao";
+
   .chap {
     font-size: 5vw;
   }
+
   .titleText {
     margin-top: 2vh;
     font-size: 7vw;
@@ -105,14 +111,15 @@ onDeactivated(() => {
 .fade-leave-active {
   transition: all 0.5s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   filter: blur(10px);
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
   filter: blur(0);
-}
-</style>
+}</style>
