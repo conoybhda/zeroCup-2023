@@ -46,7 +46,7 @@ onActivated(() => {
   ischange = false;
   setTimeout(() => {
     window.addEventListener("wheel", changeRoute);
-  }, 800);
+  }, 300);
 });
 
 onDeactivated(() => {

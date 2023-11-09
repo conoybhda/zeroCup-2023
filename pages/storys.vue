@@ -21,31 +21,31 @@ const storys = ref([
     id: 0,
     islocked: false,
     isActived: false,
-    imgSrc: "/img/a.jpg",
-    chap: "/source/PageTImeline/Chap1.png",
-    title: "/source/PageTImeline/Ziqiang.png",
+    imgSrc: "/source/PageTImeline/page1.png",
+    chap: "第一幕",
+    title: "自强学堂",
   },
   {
     id: 1,
     islocked: true,
     isActived: false,
-    imgSrc: "/img/a.jpg",
-    chap: "/source/PageTImeline/Chap2.png",
-    title: "/source/PageTImeline/West.png",
+    imgSrc: "/source/PageTImeline/page2.png",
+    chap: "第二幕",
+    title: "西迁乐山",
   },
   {
     id: 2,
     islocked: true,
     isActived: false,
-    imgSrc: "/img/a.jpg",
-    chap: "/source/PageTImeline/Chap3.png",
-    title: "/source/PageTImeline/Whu.png",
+    imgSrc: "/source/PageTImeline/page3.png",
+    chap: "第三幕",
+    title: "巍巍武大",
   },
 ]);
 
 const onChooseStory = async (id) => {
   storys.value[id].isActived = true;
-  storys.value[id].islocked = false;
+  if (id + 1 < storys.value.length) storys.value[id + 1].islocked = false;
   localStorage.setItem("storys", JSON.stringify(storys.value));
   await navigateTo({
     path: `/story-${id}/title`,

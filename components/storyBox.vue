@@ -2,9 +2,15 @@
   <div ref="box" style="font-size: 0">
     <img class="img" :src="src" />
     <div class="box" :class="isActived ? 'actived' : ''">
-      <canvas class="canvas" width="1000" height="1000" ref="canvas"></canvas>
-      <img class="chap" :src="chap" />
-      <img class="title" :src="title" />
+      <canvas
+        v-if="!props.isActived"
+        class="canvas"
+        width="1000"
+        height="1000"
+        ref="canvas"
+      ></canvas>
+      <span class="chap">{{ chap }}</span>
+      <span class="title"> {{ title }}</span>
     </div>
   </div>
 </template>
@@ -35,15 +41,27 @@ const props = defineProps({
     required: true,
   },
 });
-const lockImg = "/source/PageTImeline/Locked.png";
-const clickToEnter = "/source/PageTImeline/ClickToEnter.png";
+const lockImg = {
+  src: "/source/PageTImeline/Locked.png",
+  width: 800,
+  height: 800,
+};
+const clickToEnter = {
+  src: "/source/PageTImeline/enter.png",
+  width: 1000,
+  height: 250,
+};
 
-onMounted(() => {
+onActivated(() => {
+  if (props.isActived) return;
   const ctx = getCurrentInstance().refs.canvas.getContext("2d");
-  const img = new Image();
-  img.src = props.islocked ? lockImg : "";
+  ctx.clearRect(0, 0, 1000, 1000);
+  let img = new Image();
+  let width = props.islocked ? lockImg.width : clickToEnter.width;
+  let height = props.islocked ? lockImg.height : clickToEnter.height;
+  img.src = props.islocked ? lockImg.src : clickToEnter.src;
   img.onload = () => {
-    ctx.drawImage(img, 100, 100, 800, 800);
+    ctx.drawImage(img, (1000 - width) / 2, (1000 - height) / 2, width, height);
   };
 });
 </script>
@@ -59,9 +77,10 @@ onMounted(() => {
   font-size: 1rem;
   background: url("/source/PageTImeline/Border.png") no-repeat center center /
     100% 100%;
-  background-color: rgba(0, 0, 0, 0.25);
-  backdrop-filter: blur(1px);
+  background-color: #a1a1a19a;
+  backdrop-filter: blur(2px);
   transition: all 0.5s;
+  font-family: "XiaoDouDao";
 
   .canvas {
     width: 60%;
@@ -70,14 +89,12 @@ onMounted(() => {
   }
 
   .chap {
-    width: 35%;
-    height: auto;
+    font-size: 5vh;
     margin-bottom: 5%;
   }
 
   .title {
-    width: 55%;
-    height: auto;
+    font-size: 6vh;
     margin-bottom: 20%;
   }
 }
