@@ -47,20 +47,20 @@ const onClickThum = (id) => {
 let isChange = false;
 
 let startTime = 0;
-const isChangeute = async (e) => {
+const changeRoute = async (e) => {
   if (Date.now().valueOf() - startTime < 800) return;
-  ifisChangege) return;
+  if (isChange) return;
   if (e.deltaY < 0) {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/story-${route.params.id}/page1`,
     });
   }
 };
-isChange
+
 onActivated(() => {
   startTime = Date.now().valueOf();
-  ischange = false;
+  isChange = false;
   window.addEventListener("wheel", changeRoute);
 });
 

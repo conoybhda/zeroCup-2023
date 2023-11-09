@@ -28,31 +28,31 @@ const changePage = (num) => {
 
 let isChange = false;
 let startTime = 0;
-const isChangeute = async (e) => {
+const changeRoute = async (e) => {
   if (Date.now().valueOf() - startTime < 800) return;
-  ifisChangege) return;
+  if (isChange) return;
   if (e.deltaY > 0) {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/story-${route.params.id}/page1`,
-      isChange
-    } else {
-      ischange = true;
-      await navigateTo({
-        path: `/storys`,
-      });
-    }
+    });
+  } else {
+    isChange = true;
+    await navigateTo({
+      path: `/storys`,
+    });
+  }
 };
-  isChange
-  onActivated(() => {
-    startTime = Date.now().valueOf();
-    ischange = false;
-    window.addEventListener("wheel", changeRoute);
-  });
 
-  onDeactivated(() => {
-    window.removeEventListener("wheel", changeRoute);
-  });
+onActivated(() => {
+  startTime = Date.now().valueOf();
+  isChange = false;
+  window.addEventListener("wheel", changeRoute);
+});
+
+onDeactivated(() => {
+  window.removeEventListener("wheel", changeRoute);
+});
 </script>
 <style scoped>
 .title {
