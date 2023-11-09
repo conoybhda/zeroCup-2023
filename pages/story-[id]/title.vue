@@ -27,7 +27,9 @@ const changePage = (num) => {
 };
 
 let ischange = false;
+let startTime = 0;
 const changeRoute = async (e) => {
+  if (Date.now().valueOf() - startTime < 800) return;
   if (ischange) return;
   if (e.deltaY > 0) {
     ischange = true;
@@ -43,10 +45,9 @@ const changeRoute = async (e) => {
 };
 
 onActivated(() => {
+  startTime = Date.now().valueOf();
   ischange = false;
-  setTimeout(() => {
-    window.addEventListener("wheel", changeRoute);
-  }, 300);
+  window.addEventListener("wheel", changeRoute);
 });
 
 onDeactivated(() => {
