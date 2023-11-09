@@ -7,7 +7,7 @@ export default defineNuxtConfig({
       mode: "out-in",
     },
   },
-  css: ["~/assets/css/font.css"],
+  css: ["~/assets/css/font.css", "~/assets/css/main.css"],
   postcss: {
     plugins: {
       "postcss-px-to-viewport-8-plugin": {
