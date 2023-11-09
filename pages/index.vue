@@ -8,28 +8,27 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
 
-// 设定一个滚动距离阈值
-const scrollThreshold = 100; // 像素
+let isChange = false;
+const changeRoute = async (e) => {
+  if (isChange) return;
+  if (!textRef.value) return
+  const style = window.getComputedStyle(textRef.value);
+  const opacity = style.opacity
+  if (opacity !== '1') return
+  await navigateTo({
+    path: `/storys`,
+  });
+  isChange = true;
+};
 
-// 滚动事件的处理函数
-function handleScroll() {
-  console.log('qwe')
-  // 如果页面滚动超过了阈值
-  console.log(window.scrollY)
-  if (window.scrollY > scrollThreshold) {
-    // 触发您想要执行的函数
-    goto()
-  }
-}
-
-onMounted(() => {
-  window.addEventListener('scroll', handleScroll);
+onActivated(() => {
+  isChange = false;
+  window.addEventListener("wheel", changeRoute);
 });
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', handleScroll);
+onDeactivated(() => {
+  window.removeEventListener("wheel", changeRoute);
 });
 definePageMeta({
   pageTransition: {
@@ -38,17 +37,6 @@ definePageMeta({
 })
 
 const textRef = ref(null)
-
-// const a = setInterval(() => {
-//   if (textRef.value) {
-//     const style = window.getComputedStyle(textRef.value);
-//     console.log(style.opacity);
-//   }
-// }, 1000);
-
-// setTimeout(() => {
-//   clearInterval(a)
-// }, 10000);
 
 const goto = async () => {
   await navigateTo({
