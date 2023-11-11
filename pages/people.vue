@@ -1,11 +1,6 @@
 <template>
   <div>
-    <PeopleBox
-      class="thumb"
-      :Thumbnails="Thumbnails"
-      v-model:page="page"
-      @clickThum="onClickThum"
-    ></PeopleBox>
+    <PeopleBox class="thumb" :Thumbnails="Thumbnails" v-model:page="page" @clickThum="onClickThum"></PeopleBox>
   </div>
 </template>
 
