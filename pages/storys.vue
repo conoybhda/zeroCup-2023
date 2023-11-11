@@ -1,12 +1,7 @@
 <template>
   <div class="storys">
     <img class="bgImg" src="/source/PageTImeline/BackGroundUnColored.png" />
-    <StorysBox
-      class="storysBox"
-      ref="storysBox"
-      :storys="storys"
-      @choose-story="onChooseStory"
-    ></StorysBox>
+    <StorysBox class="storysBox" ref="storysBox" :storys="storys" @choose-story="onChooseStory"></StorysBox>
   </div>
 </template>
 <script setup>
@@ -63,13 +58,15 @@ onActivated(() => {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+
   .bgImg {
     position: absolute;
     height: 100%;
     width: auto;
-    left: 10%;
+    right: 0;
     z-index: -1;
   }
+
   .storysBox {
     position: relative;
     width: 70vw;
@@ -78,15 +75,18 @@ onActivated(() => {
     margin-left: 5vw;
   }
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   transform: translateX(-5%);
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;

@@ -2,13 +2,7 @@
   <div ref="box" style="font-size: 0">
     <img class="img" :src="src" />
     <div class="box" :class="isActived ? 'actived' : ''">
-      <canvas
-        v-if="!props.isActived"
-        class="canvas"
-        width="1000"
-        height="1000"
-        ref="canvas"
-      ></canvas>
+      <canvas v-if="!props.isActived" class="canvas" width="1000" height="1000" ref="canvas"></canvas>
       <span class="chap">{{ chap }}</span>
       <span class="title"> {{ title }}</span>
     </div>
@@ -75,8 +69,7 @@ onActivated(() => {
   justify-content: flex-end;
   align-items: center;
   font-size: 1rem;
-  background: url("/source/PageTImeline/Border.png") no-repeat center center /
-    100% 100%;
+  background: url("/source/PageTImeline/Border.png") no-repeat center center / 100% 100%;
   background-color: #a1a1a19a;
   backdrop-filter: blur(2px);
   transition: all 0.5s;
@@ -103,6 +96,7 @@ onActivated(() => {
   background-color: rgba(0, 0, 0, 0);
   backdrop-filter: blur(0px);
 }
+
 .img {
   height: 100%;
 }
