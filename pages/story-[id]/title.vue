@@ -26,16 +26,18 @@ const changePage = (num) => {
   nowStory.value = (nowStory.value + num) % data.photos.length;
 };
 
-let ischange = false;
+let isChange = false;
+let startTime = 0;
 const changeRoute = async (e) => {
-  if (ischange) return;
+  if (Date.now().valueOf() - startTime < 800) return;
+  if (isChange) return;
   if (e.deltaY > 0) {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/story-${route.params.id}/page1`,
     });
   } else {
-    ischange = true;
+    isChange = true;
     await navigateTo({
       path: `/storys`,
     });
@@ -43,10 +45,9 @@ const changeRoute = async (e) => {
 };
 
 onActivated(() => {
-  ischange = false;
-  setTimeout(() => {
-    window.addEventListener("wheel", changeRoute);
-  }, 300);
+  startTime = Date.now().valueOf();
+  isChange = false;
+  window.addEventListener("wheel", changeRoute);
 });
 
 onDeactivated(() => {
@@ -65,6 +66,7 @@ onDeactivated(() => {
   z-index: -1;
   overflow: hidden;
 }
+
 .nextPage {
   font-family: "XiaoDouDao";
   position: absolute;
@@ -75,14 +77,17 @@ onDeactivated(() => {
   z-index: 99;
   animation: shan 1s infinite both alternate ease-in-out;
 }
+
 @keyframes shan {
   0% {
     opacity: 0.2;
   }
+
   100% {
     opacity: 1;
   }
 }
+
 .box {
   width: 100vw;
   height: 100vh;
@@ -91,9 +96,11 @@ onDeactivated(() => {
   justify-content: center;
   align-items: center;
   font-family: "XiaoDouDao";
+
   .chap {
     font-size: 5vw;
   }
+
   .titleText {
     margin-top: 2vh;
     font-size: 7vw;
@@ -104,14 +111,15 @@ onDeactivated(() => {
 .fade-leave-active {
   transition: all 0.5s;
 }
+
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
   filter: blur(10px);
 }
+
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
   filter: blur(0);
-}
-</style>
+}</style>

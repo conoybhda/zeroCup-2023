@@ -1,43 +1,27 @@
 <template>
   <div class="tem">
     <Transition :appear="true" @enter="onEnter" @leave="onLeave">
-      <div class="numBox" v-if="ischange" :data-index="0">
+      <div class="numBox" v-if="isChange" :data-index="0">
         {{
-          `${MaxNum * page + 1}-${
-            MaxNum * (page + 1) > Thumbnails.length
+          `${MaxNum * page + 1}-${MaxNum * (page + 1) > Thumbnails.length
               ? Thumbnails.length
               : MaxNum * (page + 1)
-          }/${Thumbnails.length}`
+            }/${Thumbnails.length}`
         }}
       </div>
     </Transition>
 
     <div class="ThumbnailBox">
-      <img
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        class="icon"
-        style="transform: rotate(90deg)"
-        @click="changePage(-1)"
-      />
+      <img src="/source/Chapter1/ArrowForSwiper.jpg" class="icon" style="transform: rotate(90deg)"
+        @click="changePage(-1)" />
       <div class="box" ref="box">
         <transition-group :appear="true" @enter="onEnter" @leave="onLeave">
-          <People
-            v-for="(thumb, index) in NowThumbnails"
-            :key="thumb.id"
-            class="thumb"
-            :img-src="thumb.imgSrc"
-            :data-index="index"
-            :isActived="thumb.id == active"
-            @click="emits('clickThum', thumb.id)"
-          ></People>
+          <People v-for="(thumb, index) in NowThumbnails" :key="thumb.id" class="thumb" :img-src="thumb.imgSrc"
+            :data-index="index" :isActived="thumb.id == active" @click="emits('clickThum', thumb.id)"></People>
         </transition-group>
       </div>
-      <img
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        class="icon"
-        style="transform: rotate(-90deg)"
-        @click="changePage(1)"
-      />
+      <img src="/source/Chapter1/ArrowForSwiper.jpg" class="icon" style="transform: rotate(-90deg)"
+        @click="changePage(1)" />
     </div>
   </div>
 </template>
@@ -46,7 +30,7 @@ const props = defineProps(["Thumbnails", "page", "active"]);
 const emits = defineEmits(["clickThum", "update:page"]);
 const { Thumbnails } = toRefs(props);
 const MaxNum = 3;
-const ischange = ref(true);
+const isChange = ref(true);
 const box = ref(null);
 const NowThumbnails = computed(() => {
   return Thumbnails.value.slice(props.page * MaxNum, (props.page + 1) * MaxNum);
@@ -60,9 +44,9 @@ const changePage = (e) => {
     t = (t + e) % Math.ceil(Thumbnails.value.length / MaxNum);
   }
   emits("update:page", t);
-  ischange.value = !ischange.value;
+  isChange.value = !isChange.value;
   setTimeout(() => {
-    ischange.value = !ischange.value;
+    isChange.value = !isChange.value;
   }, 200);
 };
 
@@ -116,6 +100,7 @@ const onLeave = (el, done) => {
 .tem {
   display: flex;
   flex-direction: column;
+
   .numBox {
     position: relative;
     margin-left: auto;
@@ -133,6 +118,7 @@ const onLeave = (el, done) => {
     align-items: center;
     width: 100%;
     gap: 5%;
+
     .icon {
       width: auto;
       max-width: 10%;
@@ -153,6 +139,7 @@ const onLeave = (el, done) => {
       align-items: center;
       gap: 5%;
     }
+
     .thumb {
       flex-shrink: 0;
       width: 30%;

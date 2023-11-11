@@ -3,10 +3,47 @@
     <div class="mask"></div>
     <img class="title" src="/source/PageIndex/title.png" />
     <img class="draw" src="/source/PageIndex/Draw.png" />
+    <div ref="textRef" class="text" @click="goto"> 滚动以开始</div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+
+let isChange = false;
+const changeRoute = async (e) => {
+  if (isChange) return;
+  if (!textRef.value) return
+  const style = window.getComputedStyle(textRef.value);
+  const opacity = style.opacity
+  if (opacity !== '1') return
+  await navigateTo({
+    path: `/storys`,
+  });
+  isChange = true;
+};
+
+onActivated(() => {
+  isChange = false;
+  window.addEventListener("wheel", changeRoute);
+});
+
+onDeactivated(() => {
+  window.removeEventListener("wheel", changeRoute);
+});
+definePageMeta({
+  pageTransition: {
+    name: 'home'
+  }
+})
+
+const textRef = ref(null)
+
+const goto = async () => {
+  await navigateTo({
+    path: '/storys'
+  })
+}
+</script>
 
 <style scoped>
 .index {
@@ -38,6 +75,63 @@
   left: 0;
   transform: translateY(-50%);
   /* 保持元素垂直居中 */
+}
+
+.text {
+  font-size: 48px;
+  font-family: XiaoDouDao;
+  opacity: 0;
+  animation: show 6s forwards ease-in-out;
+  font-weight: 400;
+  color: #000000;
+  line-height: 0px;
+  position: absolute;
+  bottom: 100px;
+  text-decoration: none;
+}
+
+.mask {
+  position: absolute;
+  width: 100%;
+  /* 遮罩宽度与容器相同 */
+  height: 100%;
+  /* 遮罩高度与容器相同 */
+  background: transparent;
+  /* 透明背景 */
+  animation: slide-right 6s forwards ease-in-out;
+  /* 定义动画时间和类型 */
+}
+
+.mask::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -10%;
+  /* 初始化时在容器左侧外 */
+  width: 100%;
+  /* 伪元素的宽度与容器相同 */
+  height: 100%;
+  /* 伪元素的高度与容器相同 */
+  background: #fff;
+  /* 遮罩颜色 */
+  transform: skewX(-20deg);
+  /* 倾斜变换 */
+  transform-origin: bottom right;
+  /* 变换的原点 */
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes move {
@@ -169,36 +263,6 @@
 
     transform: translateY(-50%);
   }
-}
-
-.mask {
-  position: absolute;
-  width: 100%;
-  /* 遮罩宽度与容器相同 */
-  height: 100%;
-  /* 遮罩高度与容器相同 */
-  background: transparent;
-  /* 透明背景 */
-  animation: slide-right 5s forwards ease-in-out;
-  /* 定义动画时间和类型 */
-}
-
-.mask::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -10%;
-  /* 初始化时在容器左侧外 */
-  width: 100%;
-  /* 伪元素的宽度与容器相同 */
-  height: 100%;
-  /* 伪元素的高度与容器相同 */
-  background: #fff;
-  /* 遮罩颜色 */
-  transform: skewX(-20deg);
-  /* 倾斜变换 */
-  transform-origin: bottom right;
-  /* 变换的原点 */
 }
 
 /* 定义动画 */
