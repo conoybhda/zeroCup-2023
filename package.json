@@ -15,5 +15,8 @@
     "postcss-px-to-viewport-8-plugin": "^1.2.3",
     "vue": "^3.3.7",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "sass": "^1.69.5"
   }
 }
