@@ -6,6 +6,7 @@
 const a = ref("");
 const router = useRouter();
 onMounted(() => {
+  a.value = router.currentRoute.value.path;
   console.log("mounted");
 });
 onUpdated(() => {
