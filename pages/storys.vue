@@ -6,6 +6,9 @@
     <NuxtLink to="/ending">
       <img v-if="storys[2].isActived" src="/source/Chapter1/ArrowForSwiper.jpg" class="arrow" />
     </NuxtLink>
+    <NuxtLink v-show="allActived" to="/timeline">
+      <img class="totimeline" src="/source/PageTImeline/switchTimeline.png" />
+    </NuxtLink>
   </div>
 </template>
 <script setup>
@@ -120,5 +123,16 @@ onActivated(() => {
 .fade-enter-to,
 .fade-leave-from {
   opacity: 1;
+}
+
+.totimeline {
+  position: absolute;
+  top: 5vh;
+  right: 10vh;
+  width: 10vh;
+}
+
+.totimeline:hover {
+  cursor: pointer;
 }
 </style>

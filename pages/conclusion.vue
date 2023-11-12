@@ -81,8 +81,8 @@
       </div>
     </div>
     <template v-else>
-      <img class="conclusion-pic" src="source/page-ending/130logo.jpg" />
-      <NuxtLink to="/storys">
+      <img class="conclusion-pic" src="../public/source/page-ending/130logo.jpg" />
+      <NuxtLink to="/">
         <div class="continue">点击以继续</div>
       </NuxtLink>
     </template>
@@ -108,10 +108,12 @@ onActivated(() => {
   bottom: 2vh;
   right: 2vh;
   transition: all 0.5s;
+
   .skipImg {
     height: 100%;
     width: auto;
   }
+
   &:hover {
     cursor: pointer;
     opacity: 0.6;
@@ -208,6 +210,7 @@ onActivated(() => {
   cursor: pointer;
   transform: scale(1.05);
 }
+
 @keyframes showUp {
   from {
     opacity: 0;

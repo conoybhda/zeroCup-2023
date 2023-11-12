@@ -285,7 +285,7 @@ const goto = async () => {
 .title-colored {
   position: absolute;
   animation: popIn 1.5s forwards ease-in-out;
-  animation-delay: 6s;
+  animation-delay: 5s;
   opacity: 0;
 }
 

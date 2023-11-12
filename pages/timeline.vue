@@ -66,17 +66,24 @@
       </nav>
 
       <div class="sections" ref="sections">
-        <section class="section section1" id="section1"></section>
+        <section class="section section1" id="section1"
+          style="background: url('/source/pagetime/1.jpg'); background-size: cover; filter: blur(5px);">
+        </section>
 
-        <section class="section section2" id="section2"></section>
+        <section class="section section2" id="section2"
+          style="background: url('/source/pagetime/2.jpg'); background-size: cover; filter: blur(5px);"></section>
 
-        <section class="section section3" id="section3"></section>
+        <section class="section section3" id="section3"
+          style="background: url('/source/pagetime/3.jpg'); background-size: cover; filter: blur(5px);"></section>
 
-        <section class="section section4" id="section4"></section>
+        <section class="section section4" id="section4"
+          style="background: url('/source/pagetime/4.jpg'); background-size: cover; filter: blur(5px);"></section>
 
-        <section class="section section5" id="section5"></section>
+        <section class="section section5" id="section5"
+          style="background: url('/source/pagetime/5.jpg'); background-size: cover; filter: blur(5px);"></section>
 
-        <section class="section section6" id="section6"></section>
+        <section class="section section6" id="section6"
+          style="background: url('/source/pagetime/6.jpg'); background-size: cover; filter: blur(5px);"></section>
       </div>
       <div>
         <canvas ref="time" class="time"></canvas>
@@ -94,7 +101,7 @@ export default {
   data() {
     return {
       states: ["active", "", "", "", "", ""],
-      time: [2020, 2021, 2022, 2023, 2024, 2025],
+      time: [1981, 1993, 2000, 2006, 2011, 2017],
     };
   },
   mounted() {
@@ -141,9 +148,11 @@ export default {
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
   scroll-behavior: smooth;
+
   section {
     scroll-snap-align: start;
   }
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -169,14 +178,6 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  $colors: #f64747, #22a7f0, #f9690e, #9b59b6, #03c9a9, #ffcc00;
-
-  @for $i from 1 through length($colors) {
-    &:nth-child(#{$i}) {
-      background: nth($colors, $i);
-    }
-  }
 }
 
 .nav {
@@ -188,6 +189,8 @@ section {
     display: flex;
     flex-flow: column nowrap;
     justify-content: flex-end;
+    z-index: 1000;
+    font-family: "XiaoDouDao";
   }
 
   & {
