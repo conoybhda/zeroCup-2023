@@ -14,10 +14,7 @@
         </div>
         <NuxtLink to="/conclusion">
           <div v-if="Clickable" class="container-mask">
-            <img
-              class="forward"
-              src="../public/source/page-ending/forward.png"
-            />
+            <img class="forward" src="/source/page-ending/forward.png" />
           </div>
         </NuxtLink>
       </div>
@@ -42,60 +39,60 @@ definePageMeta({
 const staticData = [
   {
     topSrc: "",
-    bottomSrc: "source/page-ending/XingZhengLou-bottom.png",
-    leftSrc: "source/page-ending/XingZhengLou-left.png",
-    rightSrc: "source/page-ending/XingZhengLou-right.png",
-    centerSrc: "source/page-ending/XingZhengLou-middle.png",
-    realSrc: "source/page-ending/XingZhengLouForReal.png",
+    bottomSrc: "/source/page-ending/XingZhengLou-bottom.png",
+    leftSrc: "/source/page-ending/XingZhengLou-left.png",
+    rightSrc: "/source/page-ending/XingZhengLou-right.png",
+    centerSrc: "/source/page-ending/XingZhengLou-middle.png",
+    realSrc: "/source/page-ending/XingZhengLouForReal.png",
   },
 ];
 const index = 0;
 const Clickable = ref(false);
 const pictureData = [
   {
-    src: "source/page-ending/pic3.jpg",
+    src: "/source/page-ending/pic3.jpg",
     classname: "container-left container-addi",
     title: "白宫",
     text: "武大医学人承继着以朱裕璧先生为代表的老一辈医学专家流传的精神和情怀，奋楫争先、勇立潮头，医学事业取得了显著成绩，实现了快速发展。武大医学人坚守初心，医路前行，不断创造武汉大学医学新的辉煌，为推进中国式现代化建设做出武汉大学医学贡献。",
   },
   {
-    src: "source/page-ending/pic4.jpg",
+    src: "/source/page-ending/pic4.jpg",
     classname: "container-right container-addi",
     title: "理学楼",
     text: "理学楼位于武汉大学文理学部，隔着奥场与行政楼遥遥相望，背临东湖。北面理学院主露穹窿圆屋顶与南面工学院四角重檐攒尖顶遥相呼应，体现出“天圆地方”（北圆南方）的传统建筑理念。",
   },
   {
-    src: "source/page-ending/pic5.jpg",
+    src: "/source/page-ending/pic5.jpg",
     classname: "container-left-top container-addi",
     title: "信息学部",
     text: "武汉大学信息学部是原武汉测绘科技大学。2000年原武汉大学、武汉水利电力大学、武汉测绘科技大学、湖北医科大学合并成新的武汉大学后成为武汉大学信息学部。",
   },
   {
-    src: "source/page-ending/pic1.jpg",
+    src: "/source/page-ending/pic1.jpg",
     classname: "container-top container-addi",
     title: "樱顶",
     text: "在独静的时候，去樱顶看日出；在寂静的午后，去樱顶看落日都会是一种美妙的感觉。樱顶也可以使一座浪漫之地，它会被幸福的人称作“樱花城堡”，在这里欣赏武大美景的时候，甜蜜的人往往会心生温暖。",
   },
   {
-    src: "source/page-ending/pic2.jpg",
+    src: "/source/page-ending/pic2.jpg",
     classname: "container-right-top container-addi",
     title: "老图书馆",
     text: "老图书馆在结构技术上采用钢筋混凝土框架和组合式钢桁架混合结构承重，为中国近代建筑史上率先采用新结构、新材料、新技术仿中国古典建筑的成功之作，同时也是中西建筑设计理论、技艺、手法相互渗透、融会贯通的佳作，体现了当时的文化潮流、科学技术和时代精神。",
   },
   {
-    src: "source/page-ending/pic6.jpg",
+    src: "/source/page-ending/pic6.jpg",
     classname: "container-left-bottom container-addi",
     title: "弘毅大道",
     text: "“士不可以不弘毅，任重而道远”这便是武大对每一位学子的殷切期许与谆谆教诲。",
   },
   {
-    src: "source/page-ending/pic7.jpg",
+    src: "/source/page-ending/pic7.jpg",
     classname: "container-bottom container-addi",
     title: "信息学部图书馆",
     text: "武汉大学图书馆信息科学分馆（简称信息分馆）位于信息科学学部的中心，信息科学分馆将是新技术、新产品的体验馆；学生创新作品的展示馆；学生创新思维的发源地；学生学习、休闲的温馨之家。",
   },
   {
-    src: "source/page-ending/pic8.jpg",
+    src: "/source/page-ending/pic8.jpg",
     classname: "container-right-bottom container-addi",
     title: "樱花大道",
     text: "1972年中日建交后，日本友人曾赠与周恩来总理一些樱花树苗，周恩来总理将这批友谊之花转赠与武汉大学，植于武汉大学行政楼、新闻院、樱花大道等地。这批樱花树因为年龄原因也已经寿终正寝，但是“友谊之花二代”以及日本友人们后来陆续赠送的樱花树仍在每年的3月中下旬至4月上旬绚烂开放。",
@@ -223,10 +220,10 @@ onActivated(() => {
   width: 100%;
   object-fit: cover;
   position: absolute;
-  mask: url("public/source/page-ending/maskSource.png");
+  mask: url("/source/page-ending/maskSource.png");
   mask-size: 7100% 100%;
   animation: maskMove 1.4s steps(70) forwards;
-  background: url("public/source/page-ending/XingZhengLouForReal.png");
+  background: url("/source/page-ending/XingZhengLouForReal.png");
   background-size: 100% 100%;
   animation-delay: 4s;
 }

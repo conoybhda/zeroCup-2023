@@ -81,10 +81,7 @@
       </div>
     </div>
     <template v-else>
-      <img
-        class="conclusion-pic"
-        src="../public/source/page-ending/130logo.jpg"
-      />
+      <img class="conclusion-pic" src="source/page-ending/130logo.jpg" />
       <NuxtLink to="/storys">
         <div class="continue">点击以继续</div>
       </NuxtLink>

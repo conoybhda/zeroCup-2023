@@ -56,8 +56,8 @@ onDeactivated(() => {
 </script>
 <style scoped>
 .title {
+  width: 100vw;
   height: 100vh;
-  width: auto;
   position: absolute;
   top: 0;
   left: 50%;
@@ -65,6 +65,7 @@ onDeactivated(() => {
   opacity: 0.4;
   z-index: -1;
   overflow: hidden;
+  object-fit: cover;
 }
 
 .nextPage {
@@ -122,4 +123,5 @@ onDeactivated(() => {
 .fade-leave-from {
   opacity: 1;
   filter: blur(0);
-}</style>
+}
+</style>
