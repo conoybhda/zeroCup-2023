@@ -14,10 +14,7 @@
         </div>
         <NuxtLink to="/conclusion">
           <div v-if="Clickable" class="container-mask">
-            <img
-              class="forward"
-              src="../public/source/page-ending/forward.png"
-            />
+            <img class="forward" src="../public/source/page-ending/forward.png" />
           </div>
         </NuxtLink>
       </div>
@@ -98,7 +95,7 @@ const pictureData = [
     src: "source/page-ending/pic8.jpg",
     classname: "container-right-bottom container-addi",
     title: "樱花大道",
-    text: "1972年中日建交后，日本友人曾赠与周恩来总理一些樱花树苗，周恩来总理将这批友谊之花转赠与武汉大学，植于武汉大学行政楼、新闻院、樱花大道等地。这批樱花树因为年龄原因也已经寿终正寝，但是“友谊之花二代”以及日本友人们后来陆续赠送的樱花树仍在每年的3月中下旬至4月上旬绚烂开放。",
+    text: "1972年中日建交后，日本友人曾赠与周恩来总理一些樱花树苗，周恩来总理将这批友谊之花转赠与武汉大学，植于武汉大学行政楼、新闻院、樱花大道等地。这批樱花树已经寿终正寝，但是日本友人们后来陆续赠送的樱花树仍在每年的3月中下旬至4月上旬绚烂开放。",
   },
 ];
 
@@ -378,6 +375,7 @@ onActivated(() => {
   display: block;
   top: 0;
 }
+
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.5s;
@@ -393,5 +391,17 @@ onActivated(() => {
 .fade-leave-from {
   opacity: 1;
   filter: blur(0);
+}
+
+.content-title {
+  font-family: "XiaoDouDao";
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+  text-align: center;
+}
+
+.content-text {
+  font-family: "XiaoDouDao";
+  font-size: 1.25em;
 }
 </style>
