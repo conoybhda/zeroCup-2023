@@ -3,6 +3,7 @@
     <div class="mask"></div>
     <img class="title" src="/source/PageIndex/title.png" />
     <img class="draw" src="/source/PageIndex/Draw.png" />
+    <img class="title-colored" src="/source/PageIndex/title-colored.png" v-show="allActived" />
     <div ref="textRef" class="text" @click="goto"> 滚动以开始</div>
   </div>
 </template>
@@ -22,9 +23,15 @@ const changeRoute = async (e) => {
   isChange = true;
 };
 
+const allActived = ref(false);
+
 onActivated(() => {
   isChange = false;
   window.addEventListener("wheel", changeRoute);
+  if (localStorage.getItem("storys")) {
+    let storys = JSON.parse(localStorage.getItem("storys"));
+    allActived.value = storys.every((story) => story.isActived);
+  }
 });
 
 onDeactivated(() => {
@@ -58,7 +65,6 @@ const goto = async () => {
 }
 
 .title {
-  height: 100%;
   object-fit: cover;
   z-index: -1;
   /* 定义动画时间和类型 */
@@ -273,6 +279,23 @@ const goto = async () => {
 
   100% {
     transform: translateX(100%);
+  }
+}
+
+.title-colored {
+  position: absolute;
+  animation: popIn 1.5s forwards ease-in-out;
+  animation-delay: 6s;
+  opacity: 0;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
   }
 }
 </style>

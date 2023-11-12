@@ -1,6 +1,7 @@
 <template>
   <div class="storys">
-    <img class="bgImg" src="/source/PageTImeline/BackGroundUnColored.png" />
+    <img v-show="!allActived" class="bgImg" src="/source/PageTImeline/BackGroundUnColored.png" />
+    <img v-show="allActived" class="bgImg" src="/source/PageTImeline/BackGroundColored.jpg" />
     <StorysBox class="storysBox" ref="storysBox" :storys="storys" @choose-story="onChooseStory"></StorysBox>
   </div>
 </template>
@@ -38,6 +39,8 @@ const storys = ref([
   },
 ]);
 
+const allActived = ref(false);
+
 const onChooseStory = async (id) => {
   storys.value[id].isActived = true;
   if (id + 1 < storys.value.length) storys.value[id + 1].islocked = false;
@@ -51,6 +54,8 @@ onActivated(() => {
   if (localStorage.getItem("storys")) {
     storys.value = JSON.parse(localStorage.getItem("storys"));
   }
+  allActived.value = storys.value.every((story) => story.isActived);
+  console.log('allActived', allActived.value);
 });
 </script>
 <style scoped>
@@ -65,6 +70,7 @@ onActivated(() => {
     width: auto;
     right: 0;
     z-index: -1;
+    mask: linear-gradient(90deg, transparent, #fff);
   }
 
   .storysBox {
