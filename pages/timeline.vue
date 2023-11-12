@@ -3,12 +3,13 @@
     <div class="wrapper">
       <nav class="nav__wrapper" id="navbar-example">
         <ul class="nav">
-
           <li role="presentation" :class="states[0]">
             <a href="#section1">
               <span class="nav__counter">01</span>
               <h3 class="nav__title">武大新貌</h3>
-              <p class="nav__body">刘道玉担任武大校长，在校内推行一系列教学和管理体制改革措施，大力开展与世界著名大学合作交流，使武大迎来了文革后的第一个快速发展期。</p>
+              <p class="nav__body">
+                刘道玉担任武大校长，在校内推行一系列教学和管理体制改革措施，大力开展与世界著名大学合作交流，使武大迎来了文革后的第一个快速发展期。
+              </p>
             </a>
           </li>
 
@@ -16,7 +17,9 @@
             <a href="#section2">
               <span class="nav__counter">02</span>
               <h3 class="nav__title">百年校庆</h3>
-              <p class="nav__body">经过考证，武汉大学的校史从1893年成立的湖北自强学堂算起。1993年11月29日，武汉大学举行建校一百周年纪念大会。</p>
+              <p class="nav__body">
+                经过考证，武汉大学的校史从1893年成立的湖北自强学堂算起。1993年11月29日，武汉大学举行建校一百周年纪念大会。
+              </p>
             </a>
           </li>
 
@@ -24,7 +27,9 @@
             <a href="#section3">
               <span class="nav__counter">03</span>
               <h3 class="nav__title">四校合并</h3>
-              <p class="nav__body">2000年8月2日，武汉大学、武汉水利电力大学、武汉测绘科技大学、湖北医科大学合并组建新的武汉大学。</p>
+              <p class="nav__body">
+                2000年8月2日，武汉大学、武汉水利电力大学、武汉测绘科技大学、湖北医科大学合并组建新的武汉大学。
+              </p>
             </a>
           </li>
 
@@ -32,7 +37,9 @@
             <a href="#section4">
               <span class="nav__counter">04</span>
               <h3 class="nav__title">国际交流</h3>
-              <p class="nav__body">2006年10月27日，法国总统希拉克来到武汉大学，参观了武汉大学中南医院急救中心，并为武大中法肝胆疾病研究院揭幕。</p>
+              <p class="nav__body">
+                2006年10月27日，法国总统希拉克来到武汉大学，参观了武汉大学中南医院急救中心，并为武大中法肝胆疾病研究院揭幕。
+              </p>
             </a>
           </li>
 
@@ -40,7 +47,9 @@
             <a href="#section5">
               <span class="nav__counter">05</span>
               <h3 class="nav__title">珞珈深情</h3>
-              <p class="nav__body">2011年10月30日，由杰出校友陈东升捐赠亿元，打造的万林艺术博物馆奠基仪式在学校举行。</p>
+              <p class="nav__body">
+                2011年10月30日，由杰出校友陈东升捐赠亿元，打造的万林艺术博物馆奠基仪式在学校举行。
+              </p>
             </a>
           </li>
 
@@ -48,89 +57,124 @@
             <a href="#section6">
               <span class="nav__counter">06</span>
               <h3 class="nav__title">学科建设</h3>
-              <p class="nav__body">2017年12月28日，教育部学位与研究生教育发展中心公布了全国第四轮学科评估结果。学校51个参评学科中，19个学科排名A类。A类学科数居全国高校第七。</p>
+              <p class="nav__body">
+                2017年12月28日，教育部学位与研究生教育发展中心公布了全国第四轮学科评估结果。学校51个参评学科中，19个学科排名A类。A类学科数居全国高校第七。
+              </p>
             </a>
           </li>
-
         </ul>
       </nav>
 
-      <section class="section section1" id="section1">
-        Scroll down or use the nav.
-      </section>
+      <div class="sections" ref="sections">
+        <section class="section section1" id="section1"></section>
 
-      <section class="section section2" id="section2">
-        Section 2
-      </section>
+        <section class="section section2" id="section2"></section>
 
-      <section class="section section3" id="section3">
-        Section 3
-      </section>
+        <section class="section section3" id="section3"></section>
 
-      <section class="section section4" id="section4">
-        Section 4
-      </section>
+        <section class="section section4" id="section4"></section>
 
-      <section class="section section5" id="section5">
-        Section 5
-      </section>
+        <section class="section section5" id="section5"></section>
 
-      <section class="section section6" id="section6">
-        Section 6
-      </section>
+        <section class="section section6" id="section6"></section>
+      </div>
+      <div>
+        <canvas ref="time" class="time"></canvas>
+      </div>
     </div>
   </body>
 </template>
 
 <script>
+let worker = null;
+let canvas = null;
+let offscrean = null;
+
 export default {
   data() {
     return {
-      states: ['active', '', '', '', '', '']
-    }
+      states: ["active", "", "", "", "", ""],
+      time: [2020, 2021, 2022, 2023, 2024, 2025],
+    };
   },
   mounted() {
     let that = this;
+    console.log(this.$refs.time);
+    canvas = this.$refs.time;
+    canvas.width = 3000;
+    canvas.height = 3000;
+    offscrean = canvas.transferControlToOffscreen();
+    worker = new Worker("/worker/canvas.js");
+    worker.postMessage({ canvas: offscrean, nowNum: this.time[0] }, [
+      offscrean,
+    ]);
     this.$nextTick(() => {
-      window.onscroll = () => {
-        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-        var windowHeight = document.documentElement.clientHeight || document.body.clientHeight;
-        var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-        console.log(scrollTop, windowHeight, scrollHeight);
-        let index = Math.floor(scrollTop / windowHeight);
-        console.log(index)
-        this.states = ['', '', '', '', '', ''];
-        this.states[index] = 'active';
-      }
-    })
+      this.$refs.sections.onscroll = () => {
+        let scrollTop =
+          this.$refs.sections.scrollTop || document.body.scrollTop;
+        var windowHeight =
+          document.documentElement.clientHeight || document.body.clientHeight;
+        var scrollHeight =
+          document.documentElement.scrollHeight || document.body.scrollHeight;
+        let index = Math.ceil(scrollTop / windowHeight);
+        this.states = ["", "", "", "", "", ""];
+        this.states[index] = "active";
+        worker.postMessage({ nowNum: this.time[index] });
+      };
+    });
   },
-}
+};
 </script>
 
 <style lang="scss">
 .wrapper {
   min-height: 100vh;
-  font-family: 'Roboto Slab', serif;
+  font-family: "Roboto Slab", serif;
   font-weight: 300;
   color: #fff;
   position: relative;
+  scroll-snap-type: y mandatory;
+}
+
+.sections {
+  height: 100vh;
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  section {
+    scroll-snap-align: start;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.time {
+  width: auto;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -55%);
+  pointer-events: none;
 }
 
 section {
   height: 100vh;
   font-size: 40px;
   font-weight: 100;
-  background-color: #22A7F0;
+  background-color: #22a7f0;
+  scroll-snap-align: start;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  $colors: white, #F64747, #22A7F0, #F9690E, #9B59B6, #03C9A9, #ffcc00;
+  $colors: #f64747, #22a7f0, #f9690e, #9b59b6, #03c9a9, #ffcc00;
 
   @for $i from 1 through length($colors) {
     &:nth-child(#{$i}) {
-      background: nth($colors, $i)
+      background: nth($colors, $i);
     }
   }
 }
@@ -183,7 +227,7 @@ section {
     margin-bottom: 1em;
 
     &:after {
-      content: '';
+      content: "";
       display: block;
       border-left: 2px solid white;
       border-top: 2px solid white;
@@ -202,7 +246,7 @@ section {
 
       &:hover {
         background-color: transparent;
-        padding-left: 1em
+        padding-left: 1em;
       }
 
       &:focus {
@@ -236,8 +280,6 @@ section {
         overflow: visible;
       }
     }
-
   }
-
 }
 </style>

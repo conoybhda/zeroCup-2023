@@ -6,12 +6,12 @@ let points = [[], [], [], [], [], [], [], [], [], []];
 let point = null;
 let nowNum = 0;
 let nowPoints = [[], [], [], []];
-const speed = 10;
+const speed = 20;
 
 const initPoint = () => {
   let off = new OffscreenCanvas(8, 8);
   let octx = off.getContext("2d");
-  octx.fillStyle = "#000";
+  octx.fillStyle = "#fff";
   octx.beginPath();
   octx.arc(4, 4, 4, 0, 2 * Math.PI);
   octx.fill();
@@ -21,16 +21,16 @@ const initPoint = () => {
 const init = () => {
   for (let i = 0; i < 10; i++) {
     let t = i.toString();
-    let offscrean = new OffscreenCanvas(1000, 1000);
+    let offscrean = new OffscreenCanvas(width / 4, height);
     let ctxo = offscrean.getContext("2d");
     ctxo.fillStyle = "#000";
     ctxo.font = `normal ${height / 3}px sans-serif`;
     let text = ctxo.measureText(t);
-    ctxo.fillText(t, (1000 - text.width) / 2, 500 + height / 6);
-    let data = ctxo.getImageData(0, 0, 1000, 1000).data;
-    for (let x = 0; x < 1000; x += 10) {
-      for (let y = 0; y < 1000; y += 10) {
-        if (data[(x + y * 1000) * 4 + 3] > 0) {
+    ctxo.fillText(t, (width / 4 - text.width) / 2, height / 2 + height / 6);
+    let data = ctxo.getImageData(0, 0, width / 4, height).data;
+    for (let x = 0; x < width / 4; x += 10) {
+      for (let y = 0; y < height; y += 10) {
+        if (data[(x + (y * width) / 4) * 4 + 3] > 0) {
           points[i].push({ x: x, y: y });
         }
       }
@@ -47,6 +47,7 @@ const init = () => {
       points[i][p] = q;
     }
   }
+  console.log(points);
 };
 
 const initNowPoints = () => {
@@ -78,9 +79,10 @@ const changeNowPoins = (now) => {
         nowPoints[i][j].ty = points[t][j].y;
       }
       for (let j = nowPoints[i].length; j < points[t].length; j++) {
+        let x = Math.floor(Math.random() * nowPoints[i].length);
         nowPoints[i].push({
-          x: Math.floor(Math.random() * width),
-          y: Math.floor(Math.random() * height),
+          x: nowPoints[i][x].x,
+          y: nowPoints[i][x].y,
           tx: points[t][j].x,
           ty: points[t][j].y,
         });
@@ -102,7 +104,7 @@ const draw = () => {
   ctx.clearRect(0, 0, width, height);
   for (let i = 0; i < 4; i++) {
     nowPoints[i].forEach((p) => {
-      ctx.drawImage(point, p.x + 900 - 400 * i, p.y, 8, 8);
+      ctx.drawImage(point, p.x + ((3 - i) * width) / 4, p.y, 8, 8);
       if (
         (p.tx - p.x > 1 || p.tx - p.x < -1) &&
         (p.ty - p.y > 1 || p.ty - p.y < -1)

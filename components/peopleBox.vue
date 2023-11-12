@@ -3,25 +3,42 @@
     <Transition :appear="true" @enter="onEnter" @leave="onLeave">
       <div class="numBox" v-if="isChange" :data-index="0">
         {{
-          `${MaxNum * page + 1}-${MaxNum * (page + 1) > Thumbnails.length
+          `${MaxNum * page + 1}-${
+            MaxNum * (page + 1) > Thumbnails.length
               ? Thumbnails.length
               : MaxNum * (page + 1)
-            }/${Thumbnails.length}`
+          }/${Thumbnails.length}`
         }}
       </div>
     </Transition>
 
     <div class="ThumbnailBox">
-      <img src="/source/Chapter1/ArrowForSwiper.jpg" class="icon" style="transform: rotate(90deg)"
-        @click="changePage(-1)" />
+      <img
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        class="icon"
+        style="transform: rotate(90deg)"
+        @click="changePage(-1)"
+      />
       <div class="box" ref="box">
         <transition-group :appear="true" @enter="onEnter" @leave="onLeave">
-          <People v-for="(thumb, index) in NowThumbnails" :key="thumb.id" class="thumb" :img-src="thumb.imgSrc"
-            :data-index="index" :isActived="thumb.id == active" @click="emits('clickThum', thumb.id)"></People>
+          <People
+            v-for="(thumb, index) in NowThumbnails"
+            :key="thumb.id"
+            class="thumb"
+            :img-src="thumb.imgSrc"
+            :data-index="index"
+            :isActived="thumb.id == active"
+            :name="thumb.name"
+            @click="emits('clickThum', thumb.id)"
+          ></People>
         </transition-group>
       </div>
-      <img src="/source/Chapter1/ArrowForSwiper.jpg" class="icon" style="transform: rotate(-90deg)"
-        @click="changePage(1)" />
+      <img
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        class="icon"
+        style="transform: rotate(-90deg)"
+        @click="changePage(1)"
+      />
     </div>
   </div>
 </template>
