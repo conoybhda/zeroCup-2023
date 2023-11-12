@@ -1,12 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
   app: {
     pageTransition: {
       name: "fade",
       mode: "out-in",
     },
   },
+  ssr: true,
   css: ["~/assets/css/font.css", "~/assets/css/main.css"],
   postcss: {
     plugins: {
