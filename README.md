@@ -1,10 +1,13 @@
-# Nuxt 3 Minimal Starter
+# ZERO-2023
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+> 队名：补贴不发已读不回队
+> 组长：袁博涵
+> 队员：孙奥，罗逸宸，江悦
+> 作品题目：
 
-## Setup
+## 一、快速开始
 
-Make sure to install the dependencies:
+推荐使用 pnpm
 
 ```bash
 # npm
@@ -19,8 +22,6 @@ yarn install
 # bun
 bun install
 ```
-
-## Development Server
 
 Start the development server on `http://localhost:3000`:
 
@@ -38,38 +39,14 @@ yarn dev
 bun run dev
 ```
 
-## Production
+## 二、介绍
 
-Build the application for production:
+## 三、作品简介
 
-```bash
-# npm
-npm run build
+## 四、设计
 
-# pnpm
-pnpm run build
+## 五、技术栈
 
-# yarn
-yarn build
+本项目通过 nuxi 和 nuxt 构建，希望通过 nuxt 的 ssr 方式优化 seo
 
-# bun
-bun run build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+`postcss-px-to-viewport-8-plugin`: 方便解决多种分辨率适配问题
