@@ -66,24 +66,65 @@
       </nav>
 
       <div class="sections" ref="sections">
-        <section class="section section1" id="section1"
-          style="background: url('/source/pagetime/1.jpg'); background-size: cover; filter: blur(5px);">
-        </section>
+        <section
+          class="section section1"
+          id="section1"
+          style="
+            background: url('/source/pagetime/1.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
 
-        <section class="section section2" id="section2"
-          style="background: url('/source/pagetime/2.jpg'); background-size: cover; filter: blur(5px);"></section>
+        <section
+          class="section section2"
+          id="section2"
+          style="
+            background: url('/source/pagetime/2.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
 
-        <section class="section section3" id="section3"
-          style="background: url('/source/pagetime/3.jpg'); background-size: cover; filter: blur(5px);"></section>
+        <section
+          class="section section3"
+          id="section3"
+          style="
+            background: url('/source/pagetime/3.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
 
-        <section class="section section4" id="section4"
-          style="background: url('/source/pagetime/4.jpg'); background-size: cover; filter: blur(5px);"></section>
+        <section
+          class="section section4"
+          id="section4"
+          style="
+            background: url('/source/pagetime/4.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
 
-        <section class="section section5" id="section5"
-          style="background: url('/source/pagetime/5.jpg'); background-size: cover; filter: blur(5px);"></section>
+        <section
+          class="section section5"
+          id="section5"
+          style="
+            background: url('/source/pagetime/5.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
 
-        <section class="section section6" id="section6"
-          style="background: url('/source/pagetime/6.jpg'); background-size: cover; filter: blur(5px);"></section>
+        <section
+          class="section section6"
+          id="section6"
+          style="
+            background: url('/source/pagetime/6.jpg');
+            background-size: cover;
+            filter: blur(5px) brightness(0.7);
+          "
+        ></section>
       </div>
       <div>
         <canvas ref="time" class="time"></canvas>
@@ -91,46 +132,40 @@
     </div>
   </body>
 </template>
-
-<script>
+<script setup>
+definePageMeta({
+  pageTransition: {
+    name: "fade",
+    mode: "out-in",
+  },
+});
 let worker = null;
 let canvas = null;
 let offscrean = null;
+let instance = getCurrentInstance();
 
-export default {
-  data() {
-    return {
-      states: ["active", "", "", "", "", ""],
-      time: [1981, 1993, 2000, 2006, 2011, 2017],
-    };
-  },
-  mounted() {
-    let that = this;
-    console.log(this.$refs.time);
-    canvas = this.$refs.time;
-    canvas.width = 3000;
-    canvas.height = 3000;
-    offscrean = canvas.transferControlToOffscreen();
-    worker = new Worker("/worker/canvas.js");
-    worker.postMessage({ canvas: offscrean, nowNum: this.time[0] }, [
-      offscrean,
-    ]);
-    this.$nextTick(() => {
-      this.$refs.sections.onscroll = () => {
-        let scrollTop =
-          this.$refs.sections.scrollTop || document.body.scrollTop;
-        var windowHeight =
-          document.documentElement.clientHeight || document.body.clientHeight;
-        var scrollHeight =
-          document.documentElement.scrollHeight || document.body.scrollHeight;
-        let index = Math.ceil(scrollTop / windowHeight);
-        this.states = ["", "", "", "", "", ""];
-        this.states[index] = "active";
-        worker.postMessage({ nowNum: this.time[index] });
-      };
-    });
-  },
-};
+const states = ref(["active", "", "", "", "", ""]);
+const time = [1981, 1993, 2000, 2006, 2011, 2017];
+
+onMounted(() => {
+  canvas = instance.refs.time;
+  canvas.width = 3000;
+  canvas.height = 3000;
+  offscrean = canvas.transferControlToOffscreen();
+  worker = new Worker("/worker/canvas.js");
+  worker.postMessage({ canvas: offscrean, nowNum: time[0] }, [offscrean]);
+  instance.refs.sections.onscroll = () => {
+    let scrollTop = instance.refs.sections.scrollTop || document.body.scrollTop;
+    var windowHeight =
+      document.documentElement.clientHeight || document.body.clientHeight;
+    var scrollHeight =
+      document.documentElement.scrollHeight || document.body.scrollHeight;
+    let index = Math.ceil(scrollTop / windowHeight);
+    states.value = ["", "", "", "", "", ""];
+    states.value[index] = "active";
+    worker.postMessage({ nowNum: time[index] });
+  };
+});
 </script>
 
 <style lang="scss">
@@ -284,5 +319,22 @@ section {
       }
     }
   }
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.5s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  filter: blur(10px);
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+  filter: blur(0);
 }
 </style>
