@@ -1,7 +1,19 @@
 <template>
   <div class="storys">
     <img class="bgImg" src="/source/PageTImeline/BackGroundUnColored.png" />
-    <StorysBox class="storysBox" ref="storysBox" :storys="storys" @choose-story="onChooseStory"></StorysBox>
+    <StorysBox
+      class="storysBox"
+      ref="storysBox"
+      :storys="storys"
+      @choose-story="onChooseStory"
+    ></StorysBox>
+    <NuxtLink to="/ending">
+      <img
+        v-if="storys[2].isActived"
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        class="arrow"
+      />
+    </NuxtLink>
   </div>
 </template>
 <script setup>
@@ -73,6 +85,26 @@ onActivated(() => {
     height: 70vh;
     margin-top: 20vh;
     margin-left: 5vw;
+  }
+
+  .arrow {
+    position: absolute;
+    width: 5vw;
+    height: 10vw;
+    bottom: 1vw;
+    right: 10vw;
+    transform: rotate(-90deg);
+    z-index: 1;
+    animation: arrow 4s 1;
+  }
+}
+
+@keyframes arrow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
