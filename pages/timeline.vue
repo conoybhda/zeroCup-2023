@@ -8,7 +8,7 @@
               <span class="nav__counter">01</span>
               <h3 class="nav__title">武大新貌</h3>
               <p class="nav__body">
-                刘道玉担任武大校长，在校内推行一系列教学和管理体制改革措施，大力开展与世界著名大学合作交流，使武大迎来了文革后的第一个快速发展期。
+                刘道玉担任武大校长，在校内推行一系列教学和管理体制改革措施，使武大迎来了文革后的第一个快速发展期。
               </p>
             </a>
           </li>
@@ -66,65 +66,41 @@
       </nav>
 
       <div class="sections" ref="sections">
-        <section
-          class="section section1"
-          id="section1"
-          style="
+        <section class="section section1" id="section1" style="
             background: url('/source/pagetime/1.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
 
-        <section
-          class="section section2"
-          id="section2"
-          style="
+        <section class="section section2" id="section2" style="
             background: url('/source/pagetime/2.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
 
-        <section
-          class="section section3"
-          id="section3"
-          style="
+        <section class="section section3" id="section3" style="
             background: url('/source/pagetime/3.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
 
-        <section
-          class="section section4"
-          id="section4"
-          style="
+        <section class="section section4" id="section4" style="
             background: url('/source/pagetime/4.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
 
-        <section
-          class="section section5"
-          id="section5"
-          style="
+        <section class="section section5" id="section5" style="
             background: url('/source/pagetime/5.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
 
-        <section
-          class="section section6"
-          id="section6"
-          style="
+        <section class="section section6" id="section6" style="
             background: url('/source/pagetime/6.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "
-        ></section>
+          "></section>
       </div>
       <div>
         <canvas ref="time" class="time"></canvas>
@@ -171,7 +147,6 @@ onMounted(() => {
 <style lang="scss">
 .wrapper {
   min-height: 100vh;
-  font-family: "Roboto Slab", serif;
   font-weight: 300;
   color: #fff;
   position: relative;
@@ -225,7 +200,6 @@ section {
     flex-flow: column nowrap;
     justify-content: flex-end;
     z-index: 1000;
-    font-family: "XiaoDouDao";
   }
 
   & {
@@ -336,5 +310,23 @@ section {
 .fade-leave-from {
   opacity: 1;
   filter: blur(0);
+}
+
+.time {
+  animation: shaking 5s infinite;
+}
+
+@keyframes shaking {
+  0% {
+    transform: translate(-30%, -45%) rotate(0deg);
+  }
+
+  50% {
+    transform: translate(-30%, -45%) rotate(5deg);
+  }
+
+  100% {
+    transform: translate(-30%, -45%) rotate(0deg);
+  }
 }
 </style>

@@ -5,6 +5,7 @@
     <img class="draw" src="/source/PageIndex/Draw.png" />
     <img class="title-colored" src="/source/PageIndex/title-colored.png" v-show="allActived" />
     <div ref="textRef" class="text" @click="goto"> 滚动以开始</div>
+    <Fireworks @mousedown.left="createLoves($event)" @mouseup="removeSmallHeart" ref="background" class="background" />
   </div>
 </template>
 
@@ -50,6 +51,17 @@ const goto = async () => {
     path: '/storys'
   })
 }
+
+const inst = getCurrentInstance();
+
+const createLoves = (event) => {
+  inst.ctx.$refs.background.createLoves(event);
+}
+
+const removeSmallHeart = () => {
+  inst.ctx.$refs.background.removeSmallHert();
+}
+
 </script>
 
 <style scoped>
@@ -297,5 +309,13 @@ const goto = async () => {
   100% {
     opacity: 1;
   }
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 </style>
