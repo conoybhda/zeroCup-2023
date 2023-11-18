@@ -212,5 +212,17 @@ function startSakura() {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
+  animation: popIn 1.5s ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 </style>

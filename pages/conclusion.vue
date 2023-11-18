@@ -89,6 +89,7 @@
     <div v-if="isShow" class="skip" @click="isShow = false">
       <img class="skipImg" src="/source/page-ending/skip-forward.svg" />
     </div>
+    <Sakura></Sakura>
   </div>
 </template>
 <script setup>

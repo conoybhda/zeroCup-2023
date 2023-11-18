@@ -9,7 +9,7 @@
     <NuxtLink v-show="allActived" to="/timeline">
       <img class="totimeline" src="/source/PageTImeline/switchTimeLine.png" />
     </NuxtLink>
-    <Sakura></Sakura>
+    <Sakura v-show="allActived"></Sakura>
   </div>
 </template>
 <script setup>

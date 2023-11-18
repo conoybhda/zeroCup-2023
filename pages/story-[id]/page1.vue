@@ -2,21 +2,9 @@
   <div class="page1">
     <img :src="data.border" class="border" />
     <div class="box">
-      <img
-        class="left"
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        @click="changePage(-1)"
-      />
-      <PhotosBox
-        class="photobox"
-        :storys="data.photos"
-        v-model:nowStory="nowStory"
-      ></PhotosBox>
-      <img
-        class="right"
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        @click="changePage(1)"
-      />
+      <img class="left" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(-1)" />
+      <PhotosBox class="photobox" :storys="data.photos" v-model:nowStory="nowStory"></PhotosBox>
+      <img class="right" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(1)" />
     </div>
     <div class="description">
       <Transition :appear="true" @enter="onEnter" @leave="onLeave">
@@ -176,6 +164,12 @@ const onLeave = (el, done) => {
       height: auto;
       margin-right: -8%;
       transform: rotate(90deg);
+      transition: all 0.5s;
+    }
+
+    .left:hover {
+      cursor: pointer;
+      transform: scale(1.05) rotate(90deg);
     }
 
     .right {
@@ -183,6 +177,12 @@ const onLeave = (el, done) => {
       height: auto;
       margin-left: -8%;
       transform: rotate(-90deg);
+      transition: all 0.5s;
+    }
+
+    .right:hover {
+      cursor: pointer;
+      transform: scale(1.05) rotate(-90deg);
     }
   }
 
