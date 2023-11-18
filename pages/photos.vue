@@ -1,10 +1,6 @@
 <template>
-  <div>
-    <photosBox
-      class="storysBox"
-      v-model:nowStory="nowStory"
-      :storys="storys"
-    ></photosBox>
+  <div id="page">
+    <photosBox class="storysBox" v-model:nowStory="nowStory" :storys="storys"></photosBox>
   </div>
 </template>
 <script setup>

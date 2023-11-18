@@ -1,31 +1,15 @@
 <template>
   <div class="storys">
-    <img
-      v-show="!allActived"
-      class="bgImg"
-      src="/source/PageTImeline/BackGroundUnColored.png"
-    />
-    <img
-      v-show="allActived"
-      class="bgImg"
-      src="/source/PageTImeline/BackGroundColored.jpg"
-    />
-    <StorysBox
-      class="storysBox"
-      ref="storysBox"
-      :storys="storys"
-      @choose-story="onChooseStory"
-    ></StorysBox>
+    <img v-show="!allActived" class="bgImg" src="/source/PageTImeline/BackGroundUnColored.png" />
+    <img v-show="allActived" class="bgImg" src="/source/PageTImeline/BackGroundColored.jpg" />
+    <StorysBox class="storysBox" ref="storysBox" :storys="storys" @choose-story="onChooseStory"></StorysBox>
     <NuxtLink to="/ending">
-      <img
-        v-if="storys[2].isActived"
-        src="/source/Chapter1/ArrowForSwiper.jpg"
-        class="arrow"
-      />
+      <img v-if="storys[2].isActived" src="/source/Chapter1/ArrowForSwiper.jpg" class="arrow" />
     </NuxtLink>
     <NuxtLink v-show="allActived" to="/timeline">
       <img class="totimeline" src="/source/PageTImeline/switchTimeLine.png" />
     </NuxtLink>
+    <Sakura></Sakura>
   </div>
 </template>
 <script setup>
@@ -151,5 +135,14 @@ onActivated(() => {
 
 .totimeline:hover {
   cursor: pointer;
+}
+
+.bg-sakura {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
 }
 </style>
