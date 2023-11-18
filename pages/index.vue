@@ -5,6 +5,7 @@
     <img class="draw" src="/source/PageIndex/Draw.png" />
     <img class="title-colored" src="/source/PageIndex/title-colored.png" v-show="allActived" />
     <div ref="textRef" class="text" @click="goto"> 滚动以开始</div>
+    <Sakura />
   </div>
 </template>
 
