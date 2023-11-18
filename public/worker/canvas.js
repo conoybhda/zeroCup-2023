@@ -2,7 +2,7 @@
 let ctx = null;
 let width = 0;
 let height = 0;
-let points = [[], [], [], [], [], [], [], [], [], []];
+let points = null;
 let point = null;
 let nowNum = 0;
 let nowPoints = [[], [], [], []];
@@ -18,36 +18,14 @@ const initPoint = () => {
   point = off.transferToImageBitmap();
 };
 
-const init = () => {
-  for (let i = 0; i < 10; i++) {
-    let t = i.toString();
-    let offscrean = new OffscreenCanvas(width / 4, height);
-    let ctxo = offscrean.getContext("2d");
-    ctxo.fillStyle = "#000";
-    ctxo.font = `normal ${height / 3}px sans-serif`;
-    let text = ctxo.measureText(t);
-    ctxo.fillText(t, (width / 4 - text.width) / 2, height / 2 + height / 6);
-    let data = ctxo.getImageData(0, 0, width / 4, height).data;
-    for (let x = 0; x < width / 4; x += 10) {
-      for (let y = 0; y < height; y += 10) {
-        if (data[(x + (y * width) / 4) * 4 + 3] > 0) {
-          points[i].push({ x: x, y: y });
-        }
-      }
-    }
-
-    //随机排序
-    let m = points[i].length,
-      p,
-      q;
-    while (m) {
-      p = Math.floor(Math.random() * m--);
-      q = points[i][m];
-      points[i][m] = points[i][p];
-      points[i][p] = q;
-    }
-  }
-  console.log(points);
+const init = async () => {
+  return await fetch("/worker/num.json")
+    .then((res) => {
+      return res.json();
+    })
+    .then((res) => {
+      points = res;
+    });
 };
 
 const initNowPoints = () => {
@@ -120,13 +98,13 @@ const draw = () => {
   requestAnimationFrame(draw);
 };
 
-onmessage = (e) => {
+onmessage = async (e) => {
   if (e.data.canvas) {
     width = e.data.canvas.width;
     height = e.data.canvas.height;
     ctx = e.data.canvas.getContext("2d");
 
-    init();
+    await init();
     initPoint();
     initNowPoints();
     changeNowPoins(e.data.nowNum);

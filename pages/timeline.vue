@@ -199,7 +199,7 @@ onMounted(() => {
   position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-30%, -55%);
+  transform: translate(-30%, -45%);
   pointer-events: none;
 }
 
