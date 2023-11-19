@@ -2,20 +2,35 @@
   <div>
     <div id="lovesBgc"></div>
     <!-- 点击biubiubiu小心心  start-->
-    <div v-for="(item, index) in loves" v-bind:key="index" v-bind:ref="loves[index].count" class="img"
-      v-bind:style="item.top + item.left + item.scale + item.opacity">
+    <div
+      v-for="(item, index) in loves"
+      v-bind:key="index"
+      v-bind:ref="loves[index].count"
+      class="img"
+      v-bind:style="item.top + item.left + item.scale + item.opacity"
+    >
       <div class="left" v-bind:style="item.childBgc"></div>
       <div class="right" v-bind:style="item.childBgc"></div>
       <div class="under" v-bind:style="item.childBgc"></div>
-      <div class="text"> {{ text[loves[index].textIndex] }}</div>
+      <div class="text">{{ text[loves[index].textIndex] }}</div>
     </div>
     <!-- 点击biubiubiu小心心  stop-->
 
     <!-- 上升气泡   start-->
     <div class="bubbels">
-      <div v-for="(item, index) in bubbles" v-bind:key="index" class="bubble" v-bind:style="item.color + item.width + item.height + item.left +
-        item.delay + item.duration">
-      </div>
+      <div
+        v-for="(item, index) in bubbles"
+        v-bind:key="index"
+        class="bubble"
+        v-bind:style="
+          item.color +
+          item.width +
+          item.height +
+          item.left +
+          item.delay +
+          item.duration
+        "
+      ></div>
     </div>
     <!-- 上升气泡   stop-->
   </div>
@@ -24,25 +39,41 @@
 <script>
 export default {
   data() {
-    const text = ["文案1", "文案2", "文案3", "文案4", "文案5", "文案6", "文案7", "文案8"];
+    const text = [
+      "文案1",
+      "文案2",
+      "文案3",
+      "文案4",
+      "文案5",
+      "文案6",
+      "文案7",
+      "文案8",
+    ];
     const loves = [];
     const bubbles = [];
     // count:1,top:'200px',left:'200px',translateY:'-40px',transform:0.5,opacity:0.5
     return {
-      text: text,  //小心心上边显示的文字 
-      textIndex: 0,  //小心心数组下标
+      text: text, //小心心上边显示的文字
+      textIndex: 0, //小心心数组下标
       loves: loves, //小心心样式
-      count: 0,   //创建元素个数
-      bubbles: bubbles
-    }
+      count: 0, //创建元素个数
+      bubbles: bubbles,
+    };
   },
   methods: {
     // 创建小心心
     createLoves(event) {
       let x = 0;
       let y = 0;
-      let index = 0;//text文本下标
-      let color = "background-color:rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ");";
+      let index = 0; //text文本下标
+      let color =
+        "background-color:rgb(" +
+        parseInt(Math.random() * 255) +
+        "," +
+        parseInt(Math.random() * 255) +
+        "," +
+        parseInt(Math.random() * 255) +
+        ");";
       index = Math.floor(Math.random() * this.text.length);
       console.log(this.text[index]);
       // alert(this.$el);
@@ -50,15 +81,15 @@ export default {
       y = event.clientY - 17;
       // alert(event.clientX);
 
-      console.log('x:' + x + ' y:' + y + ' color:' + color);
+      console.log("x:" + x + " y:" + y + " color:" + color);
       let style = {
-        count: 'img' + ++this.count,//
-        top: 'top:' + y + 'px;',
-        left: 'left:' + x + 'px;',
-        opacity: 'opacity:' + 0.5 + ';',
+        count: "img" + ++this.count, //
+        top: "top:" + y + "px;",
+        left: "left:" + x + "px;",
+        opacity: "opacity:" + 0.5 + ";",
         childBgc: color,
         textIndex: index,
-        scale: 'transform: scale(' + 1 + ');',
+        scale: "transform: scale(" + 1 + ");",
         // scale : 'left:' + 1
       };
       this.loves.push(style);
@@ -66,48 +97,63 @@ export default {
       this.updateBubble();
     },
     removeSmallHert() {
-      this.loves[this.count - 1].opacity = 'opacity:' + 0 + ';',
-        this.loves[this.count - 1].scale = 'transform:translateY(' + -80 + 'px) scale(' + 0.5 + ');'
+      (this.loves[this.count - 1].opacity = "opacity:" + 0 + ";"),
+        (this.loves[this.count - 1].scale =
+          "transform:translateY(" + -80 + "px) scale(" + 0.5 + ");");
     },
     createBubble() {
       let left = [10, 20, 35, 50, 55, 65, 75, 80, 70, 85, 77];
       let wh = [40, 20, 50, 80, 35, 45, 25, 80, 15, 50, 77];
       let duration = [8, 5, 10, 7, 6, 8, 7, 6, 9, 5, 8];
       let delay = [0, 1, 1, 0, 0, 0, 2, 1, 0, 3, 2];
-      let color = "rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
-      let bubble = {}
+      let color =
+        "rgb(" +
+        parseInt(Math.random() * 255) +
+        "," +
+        parseInt(Math.random() * 255) +
+        "," +
+        parseInt(Math.random() * 255) +
+        ")";
+      let bubble = {};
       for (var i = 0; i < 11; i++) {
         console.log(wh[i]);
         bubble = {
-          left: 'left:' + Math.floor((Math.random() * 80) + 10) + '%;',
-          width: 'width:' + wh[i] + 'px;',
-          color: 'background-color:' + color + ';',
-          height: 'height:' + wh[i] + 'px;',
-          delay: 'animation-delay:' + delay[i] + 's;',
-          duration: 'animation-duration:' + duration[i] + 's;',
-        }
-        console.log('bubble' + bubble.color);
+          left: "left:" + Math.floor(Math.random() * 80 + 10) + "%;",
+          width: "width:" + wh[i] + "px;",
+          color: "background-color:" + color + ";",
+          height: "height:" + wh[i] + "px;",
+          delay: "animation-delay:" + delay[i] + "s;",
+          duration: "animation-duration:" + duration[i] + "s;",
+        };
+        console.log("bubble" + bubble.color);
         this.bubbles.push(bubble);
-        //使用随机生成位置，但是显然具有不可控性 
+        //使用随机生成位置，但是显然具有不可控性
         // wh = Math.floor((Math.random()) * 65 + 15);
         // left = Math.floor((Math.random()) * 75 + 15) ;
         // duration = Math.floor(Math.random() * 11) % 6 + 5;
         // delay = Math.floor((Math.random() * 6) % 3 + 1) * Math.floor(Math.random() * 2) % 2;
-        color = "rgb(" + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + "," + parseInt(Math.random() * 255) + ")";
+        color =
+          "rgb(" +
+          parseInt(Math.random() * 255) +
+          "," +
+          parseInt(Math.random() * 255) +
+          "," +
+          parseInt(Math.random() * 255) +
+          ")";
         // this.sleep(1000);
-        console.log(i + 'size:' + this.bubbles.length)
+        console.log(i + "size:" + this.bubbles.length);
       }
     },
     updateBubble() {
       //更新泡泡的位置
       let a = Math.floor(Math.random() * 80) + 10;
-      this.bubbles[Math.floor(Math.random() * 11)].left = 'left:' + a + '%';
-    }
+      this.bubbles[Math.floor(Math.random() * 11)].left = "left:" + a + "%";
+    },
   },
   beforeMount() {
-    this.createBubble()
-  }
-}
+    this.createBubble();
+  },
+};
 </script>
 
 <style scoped>
@@ -161,7 +207,7 @@ export default {
   position: absolute;
   top: 5px;
   left: 5px;
-  transform: rotate(45deg)
+  transform: rotate(45deg);
 }
 
 .text {
@@ -245,4 +291,3 @@ export default {
   }
 }
 </style>
-
