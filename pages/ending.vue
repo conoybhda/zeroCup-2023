@@ -1,6 +1,6 @@
 <template>
   <Transition name="fade1">
-    <div class="body">
+    <div class="body" style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
       <div class="container">
         <div class="elements-slide-in">
           <img class="ele-top ele" :src="staticData[index].topSrc" />

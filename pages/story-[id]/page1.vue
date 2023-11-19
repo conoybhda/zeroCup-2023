@@ -142,6 +142,7 @@ const onLeave = (el, done) => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 
   .border {
     width: 100vw;

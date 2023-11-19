@@ -1,5 +1,5 @@
 <template>
-  <div class="index">
+  <div class="index" style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
     <img class="title" src="/source/PageIndex/title.png" />
   </div>
 </template>
@@ -15,6 +15,7 @@
   justify-content: center;
   align-items: center;
 }
+
 .title {
   height: 100%;
 }

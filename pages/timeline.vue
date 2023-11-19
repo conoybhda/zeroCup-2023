@@ -1,6 +1,6 @@
 <template>
   <body data-spy="scroll" data-target="#navbar-example">
-    <div class="wrapper">
+    <div class="wrapper" style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
       <nav class="nav__wrapper" id="navbar-example">
         <ul class="nav">
           <li role="presentation" :class="states[0]">

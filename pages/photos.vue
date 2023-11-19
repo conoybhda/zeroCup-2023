@@ -1,5 +1,5 @@
 <template>
-  <div id="page">
+  <div class="page">
     <photosBox class="storysBox" v-model:nowStory="nowStory" :storys="storys"></photosBox>
   </div>
 </template>
@@ -23,5 +23,9 @@ const nowStory = ref(0);
   width: 70vw;
   height: 50vh;
   margin: 0 auto;
+}
+
+.page {
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 }
 </style>
