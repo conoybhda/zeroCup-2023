@@ -171,7 +171,7 @@ onMounted(() => {
       document.documentElement.clientHeight || document.body.clientHeight;
     var scrollHeight =
       document.documentElement.scrollHeight || document.body.scrollHeight;
-    let index = Math.ceil(scrollTop / windowHeight);
+    let index = Math.round(scrollTop / windowHeight);
     states.value = ["", "", "", "", "", ""];
     states.value[index] = "active";
     worker.postMessage({ nowNum: time[index] });
