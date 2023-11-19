@@ -110,7 +110,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 #lovesBgc {
   position: absolute;
   /* background-color: bisque; */

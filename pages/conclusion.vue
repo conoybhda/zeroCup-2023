@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
     <div v-if="isShow" class="fade2">
       <div class="conclusion">
         <div class="conclusion-line">我校溯承1893年自强学堂之绪，</div>

@@ -70,6 +70,7 @@ onActivated(() => {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 
   .bgImg {
     position: absolute;

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
     <img :src="data['title-picture']" class="title" />
     <div class="box">
       <span class="chap">{{ data.chap }}</span>

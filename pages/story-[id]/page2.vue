@@ -1,22 +1,10 @@
 <template>
   <div class="page2">
-    <img
-      class="bgImg"
-      style="left: 0; top: 0; transform: rotate(180deg)"
-      src="/source/Chapter1/Decoration.png"
-    />
-    <img
-      class="bgImg"
-      style="right: 0; bottom: 0"
-      src="/source/Chapter1/Decoration.png"
-    />
+    <img class="bgImg" style="left: 0; top: 0; transform: rotate(180deg)" src="/source/Chapter1/Decoration.png" />
+    <img class="bgImg" style="right: 0; bottom: 0" src="/source/Chapter1/Decoration.png" />
     <div class="body">
       <Transition :appear="true" @enter="onEnter" @leave="onLeave">
-        <img
-          v-if="aniControl"
-          :src="data.people[nowActive].imgSrc"
-          class="bodyImg"
-        />
+        <img v-if="aniControl" :src="data.people[nowActive].imgSrc" class="bodyImg" />
       </Transition>
 
       <div class="leftBox">
@@ -27,13 +15,8 @@
           </div>
         </Transition>
 
-        <PeopleBox
-          class="thumb"
-          :-thumbnails="data.people"
-          :active="nowActive"
-          v-model:page="nowPage"
-          @clickThum="onClickThum"
-        >
+        <PeopleBox class="thumb" :-thumbnails="data.people" :active="nowActive" v-model:page="nowPage"
+          @clickThum="onClickThum">
         </PeopleBox>
       </div>
     </div>
@@ -188,6 +171,7 @@ const onLeaveL = (el, done) => {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 
   .bgImg {
     position: absolute;

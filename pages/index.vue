@@ -5,7 +5,8 @@
     <img class="draw" src="/source/PageIndex/Draw.png" />
     <img class="title-colored" src="/source/PageIndex/title-colored.png" v-show="allActived" />
     <div ref="textRef" class="text" @click="goto"> 滚动以开始</div>
-    <Fireworks @mousedown.left="createLoves($event)" @mouseup="removeSmallHeart" ref="background" class="background" />
+    <Fireworks @mousedown.left="createLoves($event)" @mouseup="removeSmallHeart" ref="background" class="background"
+      v-show="allActived" />
   </div>
 </template>
 
@@ -74,6 +75,7 @@ const removeSmallHeart = () => {
   align-items: center;
   flex-direction: column;
   position: relative;
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 }
 
 .title {

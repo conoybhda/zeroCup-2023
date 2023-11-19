@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <PeopleBox class="thumb" :Thumbnails="Thumbnails" v-model:page="page" @clickThum="onClickThum"></PeopleBox>
   </div>
 </template>
@@ -39,5 +39,9 @@ const onClickThum = (id) => {
   bottom: 10vh;
   right: 5vw;
   overflow: hidden;
+}
+
+.container {
+  cursor: url("/source/cursors/Sakura_Arrow.png"), auto;
 }
 </style>
