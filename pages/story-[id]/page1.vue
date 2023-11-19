@@ -2,9 +2,21 @@
   <div class="page1">
     <img :src="data.border" class="border" />
     <div class="box">
-      <img class="left" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(-1)" />
-      <PhotosBox class="photobox" :storys="data.photos" v-model:nowStory="nowStory"></PhotosBox>
-      <img class="right" src="/source/Chapter1/ArrowForSwiper.jpg" @click="changePage(1)" />
+      <img
+        class="left"
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        @click="changePage(-1)"
+      />
+      <PhotosBox
+        class="photobox"
+        :storys="data.photos"
+        v-model:nowStory="nowStory"
+      ></PhotosBox>
+      <img
+        class="right"
+        src="/source/Chapter1/ArrowForSwiper.jpg"
+        @click="changePage(1)"
+      />
     </div>
     <div class="description">
       <Transition :appear="true" @enter="onEnter" @leave="onLeave">
@@ -48,9 +60,15 @@ const changeRoute = async (e) => {
   if (isChange) return;
   if (e.deltaY > 0) {
     isChange = true;
-    await navigateTo({
-      path: `/story-${route.params.id}/page2`,
-    });
+    if (route.params.id == 2) {
+      await navigateTo({
+        path: `/timeline`,
+      });
+    } else {
+      await navigateTo({
+        path: `/story-${route.params.id}/page2`,
+      });
+    }
   } else {
     isChange = true;
     await navigateTo({

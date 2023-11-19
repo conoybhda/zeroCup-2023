@@ -66,44 +66,73 @@
       </nav>
 
       <div class="sections" ref="sections">
-        <section class="section section1" id="section1" style="
+        <section
+          class="section section1"
+          id="section1"
+          style="
             background: url('/source/pagetime/1.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
 
-        <section class="section section2" id="section2" style="
+        <section
+          class="section section2"
+          id="section2"
+          style="
             background: url('/source/pagetime/2.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
 
-        <section class="section section3" id="section3" style="
+        <section
+          class="section section3"
+          id="section3"
+          style="
             background: url('/source/pagetime/3.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
 
-        <section class="section section4" id="section4" style="
+        <section
+          class="section section4"
+          id="section4"
+          style="
             background: url('/source/pagetime/4.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
 
-        <section class="section section5" id="section5" style="
+        <section
+          class="section section5"
+          id="section5"
+          style="
             background: url('/source/pagetime/5.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
 
-        <section class="section section6" id="section6" style="
+        <section
+          class="section section6"
+          id="section6"
+          style="
             background: url('/source/pagetime/6.jpg');
             background-size: cover;
             filter: blur(5px) brightness(0.7);
-          "></section>
+          "
+        ></section>
       </div>
       <div>
         <canvas ref="time" class="time"></canvas>
+      </div>
+      <div>
+        <nuxt-link to="/storys">
+          <img src="/source/Chapter1/ArrowForSwiper.jpg" class="arrow" />
+        </nuxt-link>
       </div>
     </div>
   </body>
@@ -144,7 +173,7 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .wrapper {
   min-height: 100vh;
   font-weight: 300;
@@ -314,6 +343,15 @@ section {
 
 .time {
   animation: shaking 5s infinite;
+}
+
+.arrow {
+  position: fixed;
+  bottom: 2vh;
+  right: 5vw;
+  height: 10vw;
+  width: 5vw;
+  transform: rotate(-90deg);
 }
 
 @keyframes shaking {
