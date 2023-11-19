@@ -6,6 +6,7 @@ let points = null;
 let point = null;
 let nowNum = 0;
 let nowPoints = [[], [], [], []];
+let mouse = { x: 0, y: 0 };
 const speed = 20;
 
 const initPoint = () => {
@@ -78,28 +79,44 @@ const changeNowPoins = (now) => {
   nowNum = m;
 };
 
+const caculate = (tx, ty, x, y) => {
+  let len = x * x + y * y;
+  let lent = tx * tx + ty * ty;
+  let rx = ((x * lent - tx * len) * 2000) / (len * lent);
+  let ry = ((y * lent - ty * len) * 2000) / (len * lent);
+  if (rx > 50 || rx < -50 || ry > 50 || ry < -50) {
+    rx /= 50;
+    ry /= 50;
+  }
+  return {
+    x: rx,
+    y: ry,
+  };
+};
+
 const draw = () => {
   ctx.clearRect(0, 0, width, height);
   for (let i = 0; i < 4; i++) {
     nowPoints[i].forEach((p) => {
       ctx.drawImage(point, p.x + ((3 - i) * width) / 4, p.y, 8, 8);
-      if (
-        (p.tx - p.x > 1 || p.tx - p.x < -1) &&
-        (p.ty - p.y > 1 || p.ty - p.y < -1)
-      ) {
-        p.x = (p.tx - p.x) / speed + p.x + (Math.random() - 0.5) * 2;
-        p.y = (p.ty - p.y) / speed + p.y + (Math.random() - 0.5) * 2;
-      } else {
-        p.x = p.tx;
-        p.y = p.ty;
-      }
+      let temp = caculate(
+        p.tx - ((3 - i) * width) / 4,
+        p.ty,
+        mouse.x - p.x - ((3 - i) * width) / 4,
+        mouse.y - p.y
+      );
+      p.x = (p.tx - p.x) / speed + p.x + temp.x;
+      p.y = (p.ty - p.y) / speed + p.y + temp.y;
     });
   }
   requestAnimationFrame(draw);
 };
 
 onmessage = async (e) => {
-  if (e.data.canvas) {
+  if (e.data.x) {
+    mouse.x = e.data.x;
+    mouse.y = e.data.y;
+  } else if (e.data.canvas) {
     width = e.data.canvas.width;
     height = e.data.canvas.height;
     ctx = e.data.canvas.getContext("2d");
@@ -109,7 +126,7 @@ onmessage = async (e) => {
     initNowPoints();
     changeNowPoins(e.data.nowNum);
     draw();
-  } else {
+  } else if (e.data.nowNum) {
     changeNowPoins(e.data.nowNum);
   }
 };

@@ -1,6 +1,9 @@
 <template>
   <body data-spy="scroll" data-target="#navbar-example">
-    <div class="wrapper" style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto;">
+    <div
+      class="wrapper"
+      style="cursor: url('/source/cursors/Sakura_Arrow.png'), auto"
+    >
       <nav class="nav__wrapper" id="navbar-example">
         <ul class="nav">
           <li role="presentation" :class="states[0]">
@@ -126,9 +129,7 @@
           "
         ></section>
       </div>
-      <div>
-        <canvas ref="time" class="time"></canvas>
-      </div>
+      <canvas ref="time" class="time"></canvas>
       <div>
         <nuxt-link to="/storys">
           <img src="/source/Chapter1/ArrowForSwiper.jpg" class="arrow" />
@@ -146,7 +147,10 @@ definePageMeta({
 });
 let worker = null;
 let canvas = null;
+let top = 0;
+let left = 0;
 let offscrean = null;
+let rate = 0;
 let instance = getCurrentInstance();
 
 const states = ref(["active", "", "", "", "", ""]);
@@ -159,6 +163,8 @@ onMounted(() => {
   offscrean = canvas.transferControlToOffscreen();
   worker = new Worker("/worker/canvas.js");
   worker.postMessage({ canvas: offscrean, nowNum: time[0] }, [offscrean]);
+  rate = 3000 / canvas.offsetWidth;
+
   instance.refs.sections.onscroll = () => {
     let scrollTop = instance.refs.sections.scrollTop || document.body.scrollTop;
     var windowHeight =
@@ -170,6 +176,23 @@ onMounted(() => {
     states.value[index] = "active";
     worker.postMessage({ nowNum: time[index] });
   };
+});
+
+const sendMouse = (e) => {
+  worker.postMessage({
+    x: (e.clientX - left) * rate,
+    y: (e.clientY - top) * rate,
+  });
+};
+
+onActivated(() => {
+  let temp = canvas.getBoundingClientRect();
+  top = Math.floor(temp.top);
+  left = Math.floor(temp.left);
+  window.addEventListener("mousemove", sendMouse);
+});
+onDeactivated(() => {
+  window.removeEventListener("mousemove", sendMouse);
 });
 </script>
 
@@ -205,6 +228,7 @@ onMounted(() => {
   left: 50%;
   transform: translate(-30%, -45%);
   pointer-events: none;
+  display: block;
 }
 
 section {
@@ -341,10 +365,6 @@ section {
   filter: blur(0);
 }
 
-.time {
-  animation: shaking 5s infinite;
-}
-
 .arrow {
   position: fixed;
   bottom: 2vh;
@@ -352,19 +372,5 @@ section {
   height: 10vw;
   width: 5vw;
   transform: rotate(-90deg);
-}
-
-@keyframes shaking {
-  0% {
-    transform: translate(-30%, -45%) rotate(0deg);
-  }
-
-  50% {
-    transform: translate(-30%, -45%) rotate(5deg);
-  }
-
-  100% {
-    transform: translate(-30%, -45%) rotate(0deg);
-  }
 }
 </style>
